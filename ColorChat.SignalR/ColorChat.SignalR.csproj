@@ -13,4 +13,10 @@
     <ProjectReference Include="..\ColorChat.Domain\ColorChat.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CarlosAg.ExcelXmlWriter">
+      <HintPath>J:\Work\Pathway\Installer\Files\ExcelXmlWrite\CarlosAg.ExcelXmlWriter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

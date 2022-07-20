@@ -22,6 +22,7 @@ namespace ColorChat.WPF
     {
         public MainWindow()
         {
+
             InitializeComponent();
         }
     }
