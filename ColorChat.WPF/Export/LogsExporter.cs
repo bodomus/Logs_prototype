@@ -57,12 +57,12 @@ namespace ColorChat.WPF.Export
             return null;
         }
 
-        public static List<string> GetExcelFileName()
+        public static string GetExcelFileName()
         {
             var prop = logger.Properties;
             var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.FullName;
             //($"{path}/Logs/Medoc.Remote.SignalR-{{Date}}.txt");
-            return null;
+            return path;
         }
 
         /// <summary>

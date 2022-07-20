@@ -3,7 +3,6 @@ using ColorChat.WPF.Services;
 using ColorChat.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
