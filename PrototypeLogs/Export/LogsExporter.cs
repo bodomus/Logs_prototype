@@ -122,6 +122,8 @@ namespace ColorChat.WPF.Export
 
         private void StartProcess()
         {
+            //TODO REmove test line
+            this.ExportThread();
             logger1.Info($"StartProcess is running.");
             lock (this.m_locker)
             {
