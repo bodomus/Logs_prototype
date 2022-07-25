@@ -12,8 +12,8 @@ namespace PrototypeLogs.Export
     {
         public SheetData Data;
 
-        public BaseStrategy(SheetData data) {
-            Data = data;
+        public BaseStrategy() {
+            //Data = data;
         }
         /// <summary>
         /// Read all strings from log file

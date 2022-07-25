@@ -8,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ColorChat.WPF.EventLogger;
-using ColorChat.WPF.Export;
 
 namespace ColorChat.WPF
 {
@@ -30,9 +29,9 @@ namespace ColorChat.WPF
             logger1.Error("Error1");
             logger1.Info("Info1");
             logger1.Trace("Info1");
-            var logsFiles = LogsExporter.GetLogs();
-            var excelFile = LogsExporter.GetExcelFileName();
-            var logExport = new LogsExporter(logsFiles, excelFile);
+            //var logsFiles = LogsExporter.GetLogs();
+            //var excelFile = LogsExporter.GetExcelFileName();
+            //var logExport = new LogsExporter(logsFiles, excelFile);
             
             HubConnection connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:5000/colorchat")

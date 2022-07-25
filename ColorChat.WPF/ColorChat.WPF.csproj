@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Export\LogsExcelBuilderOpenXML.cs" />
+    <Compile Remove="Export\LogsExporter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="fakveazn.yza~" />
   </ItemGroup>
 
@@ -23,18 +28,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Medoc.Configuration">
-      <HintPath>J:\Work\Pathway\VSA2V\Medoc.Configuration\bin\Debug\Medoc.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathway.WPF.ImportExport">
-      <HintPath>J:\Work\Pathway\VSA2V\Pathway.WPF.ImportExport\bin\Debug\Pathway.WPF.ImportExport.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Export\" />
   </ItemGroup>
 
 </Project>

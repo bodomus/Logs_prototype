@@ -102,6 +102,9 @@
     <Compile Include="EventLogger\LogItem.cs" />
     <Compile Include="EventLogger\TypeAction.cs" />
     <Compile Include="Export\BaseStrategy.cs" />
+    <Compile Include="Export\ExcelConst.cs" />
+    <Compile Include="Export\ExceptionStrategy3.cs" />
+    <Compile Include="Export\ExceptionStrategy2.cs" />
     <Compile Include="Export\ExceptionStrategy.cs" />
     <Compile Include="Export\IExportExcelStrategy.cs" />
     <Compile Include="Export\LogsExcelBuilderOpenXML.cs" />

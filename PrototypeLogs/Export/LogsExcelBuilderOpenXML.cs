@@ -12,7 +12,7 @@ using System.Text;
 
 namespace ColorChat.WPF.Export
 {
-    public sealed class LogsExcelBuilderOpenXML : ExcelBuilderOpenXML
+    public sealed class LogsExcelBuilderOpenXML// : ExcelBuilderOpenXML
     {
         private static Logger logger = LogManager.GetLogger("file");
         private IExportExcelStrategy _currentStrategy;
@@ -23,6 +23,7 @@ namespace ColorChat.WPF.Export
         private string PID_EXCEPTION = "LOG_PID";
         private string EVENT_EXCEPTION = "LOG_EVENT";
         private List<string> _logFilesNames;
+        private string _excelFile;
 
         protected WorksheetPart pidSheet;
         protected IExportExcelStrategy exportExcelStrategy;
@@ -38,22 +39,23 @@ namespace ColorChat.WPF.Export
         /// </summary>
         /// <param name="filename">represent Excel file for save data</param>
         /// <param name="logFilesName">list of log files</param>
-        public LogsExcelBuilderOpenXML(string filename, List<string> logFilesName)
-            : base(filename)
+        public LogsExcelBuilderOpenXML(string filename, List<string> logFilesName)//: base(filename)
         {
-            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet("Log", 1);
-            this.dataSheet = dataSheets.Key;
-            this.dataSheetData = dataSheets.Value;
+            //KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet("Short", 1);
+            //this.dataSheet = dataSheets.Key;
+            //this.dataSheetData = dataSheets.Value;
 
-            KeyValuePair<WorksheetPart, SheetData> descSheets = CreateSheet("Event", 2, 25);
-            this.descriptionSheet = descSheets.Key;
-            this.descriptionSheetData = descSheets.Value;
+            //KeyValuePair<WorksheetPart, SheetData> descSheets = CreateSheet("Event", 2, 25);
+            //this.descriptionSheet = descSheets.Key;
+            //this.descriptionSheetData = descSheets.Value;
 
-            KeyValuePair<WorksheetPart, SheetData> pidSheets = CreateSheet("PID", 3, 25);
-            this.pidSheet = pidSheets.Key;
-            this.pidSheetData = pidSheets.Value;
+            //KeyValuePair<WorksheetPart, SheetData> pidSheets = CreateSheet("PID", 3, 25);
+            //this.pidSheet = pidSheets.Key;
+            //this.pidSheetData = pidSheets.Value;
+            _excelFile = filename;
             _currentIndexStrategy = 0;
             _logFilesNames = logFilesName;
+            //SaveAndClose();
             //LogsExcelBuilderOpenXML.CreateSpreadsheetWorkbook(filename);
         }
 
@@ -63,8 +65,8 @@ namespace ColorChat.WPF.Export
         }
         public void SetCurrentStrategy(int v)
         {
-            string fileName = _logFilesNames[v];
-            IExportExcelStrategy st = StrategyFactory.Create(fileName);
+            string fileName = _logFilesNames[v - 1];
+            IExportExcelStrategy st = StrategyFactory.Create(_excelFile, fileName, (uint)v);
             SetStrategy(st);
         }
 
@@ -86,15 +88,17 @@ namespace ColorChat.WPF.Export
         public void DoWorkWithFile(string filePath)
         {
             var stindex = GetNextStrategy();
-            do {
+            if (stindex < 0)
+                return;
+            do
+            {
                 SetCurrentStrategy(stindex);
                 _currentStrategy.DoWork();
-                stindex = GetNextStrategy();
-            } while () 
-            
-            SaveAndClose();
-        }
 
-              
+                stindex = GetNextStrategy();
+            } while (stindex > 0); 
+            
+            
+        }
     }
 }

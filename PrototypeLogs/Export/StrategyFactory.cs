@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,25 +11,22 @@ namespace PrototypeLogs.Export
     internal class StrategyFactory
     {
         private static Logger logger = LogManager.GetLogger("file");
-        public static IExportExcelStrategy Create(string name)
+        public static IExportExcelStrategy Create(string excelFile, string name, uint strategyIndex)
         {
-            switch (name)
+            switch (Path.GetFileNameWithoutExtension(name))
             {
-                case "LOG_EXCEPTION":
+                case "short":
                     {
-                        return new ExceptionStrategy();
-                        break;
+                        return new ExceptionStrategy(excelFile, name, strategyIndex);
                     }
 
-                case "LOG_PID":
+                case "pid":
                     {
-                        return new ExceptionStrategy();
-                        break;
+                        return new ExceptionStrategy2(excelFile, name, strategyIndex);
                     }
-                case "LOG_EVENT":
+                case "event":
                     {
-                        return new ExceptionStrategy();
-                        break;
+                        return new ExceptionStrategy(excelFile, name, strategyIndex);
                     }
                 default:
                     {
@@ -36,7 +34,6 @@ namespace PrototypeLogs.Export
                         throw new InvalidProgramException("StrategyFactory invald file name");
                     }
             }
-            return null;
         }
     }
 }

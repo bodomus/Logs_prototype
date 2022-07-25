@@ -167,13 +167,9 @@ namespace ColorChat.WPF.Export
                     return;
 
                 }
-
-
-
                 //this.ExportCovasData(this.m_results, builder);
                 //this.ExportStatisticsData(this.m_results, builder);
-
-                builder.SaveAndClose();
+                //builder.SaveAndClose();
 
                 this.OnFinished();
             }

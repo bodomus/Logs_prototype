@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PrototypeLogs.Export
 {
-    public class ExceptionStrategy : BaseStrategy, IExportExcelStrategy
+    public class ExceptionStrategy2 : BaseStrategy, IExportExcelStrategy
     {
         private string _logFileName;
         private string _excelFileName;
@@ -20,11 +20,13 @@ namespace PrototypeLogs.Export
             {
                 return new Dictionary<int, string>() {
                     {1, "Name"},
-                    {2, "Name 2"}
+                    {2, "Name 2"},
+                    {3, "Name 3"},
+                    {4, "Name 4"}
                     };
             }
         }
-        public ExceptionStrategy(string excelFile, string logFileName, uint strategyIndex) : base()
+        public ExceptionStrategy2(string excelFile, string logFileName, uint strategyIndex) : base()
         {
             _logFileName = logFileName;
             _excelFileName = excelFile;
@@ -40,7 +42,7 @@ namespace PrototypeLogs.Export
             rowIdx = 2;
             var strings = ReadFile(_logFileName);
             var sheetName = GetSheetName();
-            var excel = new OpenXML(_excelFileName, sheetName, _strategyIndex);
+            var excel = new OpenXML(_excelFileName, sheetName, _strategyIndex, true, false);
             excel.SetColumnWidth(1, 10, 200);
             excel.AddHeader(_sheetHeader);
             //excel.SetCurrentSheetByName(sheetName);
