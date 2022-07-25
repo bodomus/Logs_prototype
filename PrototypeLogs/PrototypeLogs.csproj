@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,7 +38,7 @@
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="Medoc.Configuration">
-      <HintPath>J:\Work\Pathway\VSA2V\Medoc.Configuration\bin\Debug\Medoc.Configuration.dll</HintPath>
+      <HintPath>..\..\medoc_pathway\Pathway.WPF\bin\Debug\Medoc.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
@@ -70,7 +71,7 @@
       <HintPath>..\packages\NLog.Extensions.Logging.5.0.1\lib\net461\NLog.Extensions.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Pathway.WPF.ImportExport">
-      <HintPath>J:\Work\Pathway\VSA2V\Pathway.WPF.ImportExport\bin\Debug\Pathway.WPF.ImportExport.dll</HintPath>
+      <HintPath>..\..\medoc_pathway\Pathway.WPF\bin\Debug\Pathway.WPF.ImportExport.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -100,8 +101,13 @@
   <ItemGroup>
     <Compile Include="EventLogger\LogItem.cs" />
     <Compile Include="EventLogger\TypeAction.cs" />
+    <Compile Include="Export\BaseStrategy.cs" />
+    <Compile Include="Export\ExceptionStrategy.cs" />
+    <Compile Include="Export\IExportExcelStrategy.cs" />
     <Compile Include="Export\LogsExcelBuilderOpenXML.cs" />
     <Compile Include="Export\LogsExporter.cs" />
+    <Compile Include="Export\OpenXML.cs" />
+    <Compile Include="Export\StrategyFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

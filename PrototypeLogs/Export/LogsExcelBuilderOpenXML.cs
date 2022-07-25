@@ -1,10 +1,13 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using NLog;
 using Pathway.WPF.ImportExport.Excel;
+using PrototypeLogs.Export;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ColorChat.WPF.Export
@@ -12,13 +15,17 @@ namespace ColorChat.WPF.Export
     public sealed class LogsExcelBuilderOpenXML : ExcelBuilderOpenXML
     {
         private static Logger logger = LogManager.GetLogger("file");
-        private uint rowIdx = 0;
+        private IExportExcelStrategy _currentStrategy;
+        private int _currentIndexStrategy;
+        
         private int columnStepIndex = 1;
-        private string LOG_EXCEPTION = "EXCEPTION";
-        private string PID_EXCEPTION = "PID_EXCEPTION";
-        private string EVENT_EXCEPTION = "EVENT";
+        private string LOG_EXCEPTION = "LOG_EXCEPTION";
+        private string PID_EXCEPTION = "LOG_PID";
+        private string EVENT_EXCEPTION = "LOG_EVENT";
+        private List<string> _logFilesNames;
 
         protected WorksheetPart pidSheet;
+        protected IExportExcelStrategy exportExcelStrategy;
 
         protected SheetData pidSheetData;
 
@@ -45,35 +52,49 @@ namespace ColorChat.WPF.Export
             KeyValuePair<WorksheetPart, SheetData> pidSheets = CreateSheet("PID", 3, 25);
             this.pidSheet = pidSheets.Key;
             this.pidSheetData = pidSheets.Value;
+            _currentIndexStrategy = 0;
+            _logFilesNames = logFilesName;
+            //LogsExcelBuilderOpenXML.CreateSpreadsheetWorkbook(filename);
         }
 
-        /// <summary>
-        /// Read all strings from log file
-        /// </summary>
-        /// <param name="path">path to the log file</param>
-        /// <returns></returns>
-        private IEnumerable<string> ReadFile(string path)
+        public int GetCurrentStrategy()
         {
-            string[] readText = File.ReadAllLines(path);
-            return new List<string>(readText);
+            return _currentIndexStrategy;
+        }
+        public void SetCurrentStrategy(int v)
+        {
+            string fileName = _logFilesNames[v];
+            IExportExcelStrategy st = StrategyFactory.Create(fileName);
+            SetStrategy(st);
         }
 
-        /// <summary>
-        /// Add Header 
-        /// </summary>
-        public void AddHeader()
+
+        public int GetNextStrategy() {
+            _currentIndexStrategy++;
+            if (_currentIndexStrategy > _logFilesNames.Count)
+                return -1;
+            return _currentIndexStrategy;
+        }
+
+        void SetStrategy(IExportExcelStrategy strategy)
         {
-            this.rowIdx++;
-            Row row = dataSheetData.AppendChild(new Row() { RowIndex = rowIdx });
-                
-            InsertCell(row, "Number", CellValues.String, BOLDINDEXSTYLE);
-            InsertCell(row, "Value", CellValues.String, BOLDINDEXSTYLE);
+            if (strategy == null)
+                logger.Error("Could not  get current strategy.");
+            _currentStrategy = strategy;
+        }
+
+        public void DoWorkWithFile(string filePath)
+        {
+            var stindex = GetNextStrategy();
+            do {
+                SetCurrentStrategy(stindex);
+                _currentStrategy.DoWork();
+                stindex = GetNextStrategy();
+            } while () 
             
+            SaveAndClose();
         }
 
-        public void DoWorkWithFile(string filePath) {
-            var strings = ReadFile(filePath);
-
-        }
+              
     }
 }

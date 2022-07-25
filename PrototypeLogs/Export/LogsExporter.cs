@@ -113,7 +113,9 @@ namespace ColorChat.WPF.Export
             }
             if (_builder == null)
             {
+                //LogsExcelBuilderOpenXML.CreateSpreadsheetWorkbook(m_fileName);
                 _builder = new LogsExcelBuilderOpenXML(this.m_fileName, m_logList);
+                _builder.DoWorkWithFile(m_logList[0]);
                 logger1.Info($"_builder is created.");
             }
             Interlocked.Increment(ref _ref);
