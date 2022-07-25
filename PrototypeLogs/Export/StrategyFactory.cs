@@ -22,7 +22,7 @@ namespace PrototypeLogs.Export
 
                 case "pid":
                     {
-                        return new ExceptionStrategy2(excelFile, name, strategyIndex);
+                        return new EventStrategy(excelFile, name, strategyIndex);
                     }
                 case "event":
                     {

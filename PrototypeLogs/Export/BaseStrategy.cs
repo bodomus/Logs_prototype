@@ -10,20 +10,21 @@ namespace PrototypeLogs.Export
 {
     public class BaseStrategy
     {
-        public SheetData Data;
+        protected string _logFileName;
+        protected string _excelFileName;
+        protected uint _strategyIndex;
 
         public BaseStrategy() {
-            //Data = data;
+            
         }
         /// <summary>
         /// Read all strings from log file
         /// </summary>
         /// <param name="path">path to the log file</param>
         /// <returns></returns>
-        protected IEnumerable<string> ReadFile(string path)
+        protected IEnumerable<string> ReadFile(ILogFileReader logFileReader)
         {
-            string[] readText = File.ReadAllLines(path);
-            return new List<string>(readText);
+            return logFileReader?.GetStrings();
         }
     }
 }

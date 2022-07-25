@@ -23,12 +23,8 @@ namespace ColorChat.WPF
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            logger.Error("Error");
             logger.Info("Info");
-            logger.Trace("Info");
-            logger1.Error("Error1");
-            logger1.Info("Info1");
-            logger1.Trace("Info1");
+            logger.Info("Note \n A: - Action\n V: - Value\n D: Desciption\n KP: KeyPress\n TI: Text input\n ");
             //var logsFiles = LogsExporter.GetLogs();
             //var excelFile = LogsExporter.GetExcelFileName();
             //var logExport = new LogsExporter(logsFiles, excelFile);

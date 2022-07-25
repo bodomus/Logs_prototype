@@ -1,0 +1,3933 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Pathway.WPF.ImportExport</name>
+    </assembly>
+    <members>
+        <member name="T:Pathway.WPF.ImportExport.CsvExporterBase">
+            <summary>
+            CsvExporter base class
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.CsvExporterBase.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.CsvExporterBase.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.CsvExporterBase.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.CsvExporterBase.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.CsvExporterBase.Start">
+            <summary>
+            Start export
+            </summary>	
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.CsvExporterBase.Stop">
+            <summary>
+            Stop export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.CsvExporterBase.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.CsvExporterBase.ExportThread">
+            <summary>
+            Perform export data
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.CsvFileWriter">
+            <summary>
+            Class for writing to comma-separated-value (CSV) files.
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.CsvFileWriter.SpecialChars">
+            <summary>
+            These are special characters in CSV files. If a column contains any
+            of these characters, the entire column is wrapped in double quotes.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.CsvFileWriter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.CsvFileWriter"/> class for the specified file path.		
+            </summary>
+            <param name="path">The name of the CSV file to write to</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.CsvFileWriter.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.CsvFileWriter"/> class.
+            </summary>
+            <param name="writer">Destination stream </param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.CsvFileWriter.Delimiter">
+            <summary>
+            Gets/sets the character used for column delimiters.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.CsvFileWriter.Quote">
+            <summary>
+            Gets/sets the character used for column quotes.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.CsvFileWriter.WriteRow(System.Collections.Generic.List{System.String})">
+            <summary>
+            Writes a row of columns to the current CSV file.
+            </summary>
+            <param name="columns">The list of columns to write</param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ThermodeCsvExporter">
+            <summary>
+            Thr to csv file converter
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeCsvExporter.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.ThermodeCsvExporter"/> class.
+            </summary>
+            <param name="fileNames">Source thermode (.thr) file names.</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeCsvExporter.ExportThread">
+            <summary>
+            Perform export data
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter">
+            <summary>
+            ThermodeTestResultsCsvExporter - exports ThermodeTestResults into csv file
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.#ctor(Medoc.ATS.ThermodeTestResults,Pathway.WPF.ImportExport.ResultsExportDesription,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter"/> class.
+            </summary>
+            <param name="results">ThermodeTestResults</param>
+            <param name="exportDesc">ResultsExportDesription</param>
+            <param name="fileName">Name of the file to export</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.Dispose">
+            <summary>
+            Clean up any resources being used
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.Start">
+            <summary>
+            Start export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.Stop">
+            <summary>
+            Stop export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsCsvExporter.ExportData(System.Collections.Generic.List{Medoc.ATS.TestResults},Pathway.WPF.ImportExport.CsvFileWriter)">
+            <summary>
+            Saves test results in csv format using CsvFileWriter
+            </summary>
+            <param name="thermodeTestResults">Thermode test result list</param>
+            <param name="writer">CSV file writer</param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML">
+            <summary>
+            Excel builder using Open XML SDK
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.#ctor(System.String)">
+            <summary>
+            Creates new ExcelBuilder
+            </summary>
+            <param name="fileName">Name of file to export in</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.AddHeader(System.String)">
+            <summary>
+            Adds header
+            </summary>
+            <param name="title">Title</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.AddEntry(System.String,System.String,DocumentFormat.OpenXml.Spreadsheet.CellValues)">
+            <summary>
+            Adds entry
+            </summary>
+            <param name="name">Name</param>
+            <param name="value">Value</param>
+            <param name="type">Type</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.InsertCell(DocumentFormat.OpenXml.Spreadsheet.Row,System.String,DocumentFormat.OpenXml.Spreadsheet.CellValues,System.UInt32)" -->
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.SaveAndClose">
+            <summary>
+            Saves data
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.CreateSheet(System.String,System.UInt32,System.Double)">
+            <summary>
+            Create sheet
+            </summary>
+            <returns>WorksheetPart and SheetData</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.InsertFieldData(System.String,System.UInt32,System.UInt32,DocumentFormat.OpenXml.Packaging.WorksheetPart,DocumentFormat.OpenXml.Spreadsheet.CellValues,System.UInt32)">
+            <summary>
+            Insert field Data for supported OpenOffice (to slow)
+            </summary>
+            <param name="value"></param>
+            <param name="column"></param>
+            <param name="row"></param>
+            <param name="workSheet"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelBuilderOpenXML.InsertSharedStringItem(System.String,DocumentFormat.OpenXml.Packaging.SharedStringTablePart)">
+            <summary>
+            Insert column value
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelImageHelper.InsertImage(System.Drawing.Image,DocumentFormat.OpenXml.Packaging.WorksheetPart,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Inserts the image at the specified location 
+            </summary>
+            <param name="sheet">The WorksheetPart where image to be inserted</param>
+            <param name="startRowIndex">The starting Row Index</param>
+            <param name="startColumnIndex">The starting column index</param>
+            <param name="endRowIndex">The ending row index</param>
+            <param name="endColumnIndex">The ending column index</param>
+            <param name="imageStream">Stream which contains the image data</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelImageHelper.GetIndexofLegacyDrawing(DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Get the index of legacy drawing element in the specified WorksheetPart
+            </summary>
+            <param name="sheet1">The worksheetPart</param>
+            <returns>Index of legacy drawing</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelImageHelper.GetSheetByName(DocumentFormat.OpenXml.Packaging.WorkbookPart,System.String)">
+            <summary>
+            Returns the WorksheetPart for the specified sheet name
+            </summary>
+            <param name="workbookpart">The WorkbookPart</param>
+            <param name="sheetName">The name of the worksheet</param>
+            <returns>Returns the WorksheetPart for the specified sheet name</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ExcelImageHelper.GetNextRelationShipID(DocumentFormat.OpenXml.Packaging.WorksheetPart)">
+            <summary>
+            Returns the next relationship id for the specified WorksheetPart
+            </summary>
+            <param name="sheet1">The worksheetPart</param>
+            <returns>Returns the next relationship id </returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML">
+            <summary>
+            Export Test results to Excel
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.AddTempHeader">
+            <summary>
+            Add Header to thermode programs
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.AddCovasHeader">
+            <summary>
+            Add Covas header
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.AddAmplitudeHeader">
+            <summary>
+            Add Header to vibratory programs
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.AddTemperatureRow(Pathway.WPF.ImportExport.ResultsExportRow)">
+            <summary>
+            Adds new row
+            </summary>
+            <param name="r">Row</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.AddCovasRow(Pathway.WPF.ImportExport.ResultsExportRow)">
+            <summary>
+            Adds new row
+            </summary>
+            <param name="r">Row</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.AddAmplitudeRow(Pathway.WPF.ImportExport.ResultsExportRow)">
+            <summary>
+            Adds new row
+            </summary>
+            <param name="r">Row</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.SetDescription(Pathway.WPF.ImportExport.ResultsExportDesription)">
+            <summary>
+            Out data to Excel column
+            </summary>
+            <param name="description">ResultsExportDesription</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.AddCovasTab">
+            <summary>
+            Add COVAS tab
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.LimitsSequenceStatistics})">
+            <summary>
+            Fill Results tab for Limits sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.LevelSequenceStatistics})">
+            <summary>
+            Fill Results tab for Level sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.VSALevelSequenceStatistics})">
+            <summary>
+            Fill Results tab for VSALevel sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.VSALimitsSequenceStatistics})">
+            <summary>
+            Fill Results tab for VSALimits sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.TSLSequenceStatistics})">
+            <summary>
+            Fill Results tab for TSL sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.SuprathresholdSequenceStatistics})">
+            <summary>
+            Fill Results tab for Suprathreshold sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.RampAndHoldSequenceStatistics})">
+            <summary>
+            Fill Results tab for RampAndHold sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Excel.ResultsExcelBuilderOpenXML.FillPainRatingTab(System.Collections.Generic.List{Medoc.ATS.PainRating})">
+            <summary>
+            Fills pain rating tab
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ResultsExportDesription">
+            <summary>
+            Results Export Desription
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.StatisticExportRowDescription">
+            <summary>
+            Statistic export row description
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.BinaryExporter">
+            <summary>
+            Binary Exporter
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BinaryExporter.#ctor(System.String,System.Collections.IList)">
+            <summary>
+            Binary Exporter
+            </summary>
+            <param name="fileName"></param>
+            <param name="objects"></param>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BinaryExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BinaryExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BinaryExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BinaryExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.DepartmentNameConflict.GetLocalObject">
+            <summary>
+            Returns local object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.DepartmentNameConflict.GetImportObject">
+            <summary>
+            Returns Import Object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.DepartmentNameConflict.DataList">
+            <summary>
+            DataList
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.DepartmentNameConflictData.AllowEdit">
+            <summary>
+            AllowEdit row
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict">
+            <summary>
+            PatientUniqueConflict
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.Caption">
+            <summary>
+            Caption
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.DisplayData(Pathway.WPF.ImportExport.ImportConflict)">
+            <summary>
+            DisplayData
+            </summary>
+            <param name="arguments"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.SelectedItem">
+            <summary>
+            SelectedItem
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.GetLocalObject">
+            <summary>
+            GetLocalObject
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.GetImportObject">
+            <summary>
+            GetImportObject
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.ColumnsList">
+            <summary>
+            ColumnsList
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.DataList">
+            <summary>
+            DataList
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.SkipMessage">
+            <summary>
+            SkipMessage
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflict.FillDataRow(Medoc.ATS.Patient,System.String,System.Boolean)">
+            <summary>
+            Fills in data to a row and adds it to the table.
+            </summary>
+            <param name="patient"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData">
+            <summary>
+            PatientUniqueConflictData
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.FirstName">
+            <summary>
+            First Name
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.LastName">
+            <summary>
+            LastName
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.Social">
+            <summary>
+            Social
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.DriverLicense">
+            <summary>
+            Driver License
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.Source">
+            <summary>
+            Source
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.ID">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.Patient">
+            <summary>
+            Patient
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.PatientUniqueConflictData.AllowEdit">
+            <summary>
+            AllowEdit row
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict">
+            <summary>
+            Program unique conflict
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.Caption">
+            <summary>
+            Caption
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.DisplayData(Pathway.WPF.ImportExport.ImportConflict)">
+            <summary>
+            DisplayData
+            </summary>
+            <param name="arguments"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.SelectedItem">
+            <summary>
+            SelectedItem
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.GetLocalObject">
+            <summary>
+            GetLocalObject
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.GetImportObject">
+            <summary>
+            GetImportObject
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.ColumnsList">
+            <summary>
+            ColumnsList
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.DataList">
+            <summary>
+            DataList
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.SkipMessage">
+            <summary>
+            SkipMessage
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflict.FillDataRow(Medoc.ATS.TestProgram,System.String,System.Boolean)">
+            <summary>
+            Fills in data to a row and adds it to the table.
+            </summary>
+            <param name="patient"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflictData">
+            <summary>
+            Program unique conflict data
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflictData.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.ProgramUniqueConflictData.AllowEdit">
+            <summary>
+            AllowEdit row
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict">
+            <summary>
+            Test results conflict
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.Caption">
+            <summary>
+            Caption
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.DisplayData(Pathway.WPF.ImportExport.ImportConflict)">
+            <summary>
+            DisplayData
+            </summary>
+            <param name="arguments"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.FillDataRow(Medoc.ATS.TestResults,System.String,System.Boolean)">
+            <summary>
+            Fills in data to a row and adds it to the table.
+            </summary>
+            <param name="program"></param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.SelectedItem">
+            <summary>
+            Gets the selection made by the user inorder to resolve the conflict.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.GetLocalObject">
+            <summary>
+            Returns local object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.GetImportObject">
+            <summary>
+            Returns Import Object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.ColumnsList">
+            <summary>
+            ColumnsList
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.DataList">
+            <summary>
+            DataList
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflict.SkipMessage">
+            <summary>
+            Returns message relevant for current conflict, which we want to display
+            to the user on "skip" event.
+            </summary>
+            <returns>relevant message for current conflict</returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData">
+            <summary>
+            Test Results Conflict Data
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.Date">
+            <summary>
+            Date
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.Source">
+            <summary>
+            Local/Imported
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.ProgramName">
+            <summary>
+            Program name
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.PatientName">
+            <summary>
+            Patient name
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.PatientID">
+            <summary>
+            Patient ID
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.TestResult">
+            <summary>
+            Test Results
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.AllowEdit">
+            <summary>
+            AllowEdit row
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.TestResultsUniqueConflictData.BodySite">
+            <summary>
+            Body Site description
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.UserDefinedFieldsConflict.GetLocalObject">
+            <summary>
+            Returns local object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.UserDefinedFieldsConflict.GetImportObject">
+            <summary>
+            Returns Import Object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.UserDefinedFieldsConflict.DataList">
+            <summary>
+            DataList
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Conflicts.UserDefinedFieldsConflictData">
+            <summary>
+            UserDefinedFieldsConflictData
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Conflicts.UserDefinedFieldsConflictData.AllowEdit">
+            <summary>
+            AllowEdit row
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportConflictDelegate">
+            <summary>
+            Import Conflict Delegate
+            </summary>
+            <param name="source"></param>
+            <param name="args">ImportConflict</param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportEventDelegate">
+            <summary>
+            Import Event Delegate
+            </summary>
+            <param name="source"></param>
+            <param name="importObject"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.RowImportedEventHandler">
+            <summary>
+            Delegate for ExcelImporter.RowImported" event 
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportFinishedEventHandler">
+            <summary>
+            delegate for ImportFinished event
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ProgressEventDelegate">
+            <summary>
+            Progress Event Delegate
+            </summary>
+            <param name="sender"></param>
+            <param name="progress"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ProgressMessageEventDelegate">
+            <summary>
+            Progress Message Event Delegate
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportConflictDescription">
+            <summary>
+            Describes the import conflict 
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportConflictDescription.UserDefinedFieldName">
+            <summary>
+            names of user defined fields are different 
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportConflictDescription.DepartmentName">
+            <summary>
+            the same department exists but has different name
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportConflictDescription.PatientUniqueFields">
+            <summary>
+            conflict in the patient unique fields; user can / should select one
+            of the local patients or edit the unique fields of the import patient 
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportConflictDescription.UserName">
+            <summary>
+            conflict in the user name
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportConflictDescription.TestProgramName">
+            <summary>
+            conflict in the testProgram name
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportConflictDescription.TestResult">
+            <summary>
+            conflict in the testResult
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportProcessType.Process">
+            <summary>
+            Process
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ImportProcessType.Rewrite">
+            <summary>
+            Rewrite
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.AbortedEventArgs">
+            <summary>
+            Arguments for ExcelImporter.Aborted event
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.AbortedEventArgs.Exception">
+            <summary>
+            Exception that be throwed when invokes ExcelImporter.Aborted event
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AbortedEventArgs.#ctor(System.Exception)">
+            <summary>
+            Creates instance of this class
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportCompletedEventArgs">
+            <summary>
+            Arguments for ExcelImporter.ImportCompleted event.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ImportCompletedEventArgs.#ctor(System.Boolean,System.String)">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="isCanceled"></param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportCompletedEventArgs.ImportCompletedResultMessage">
+            <summary>
+            Returns the localizated string. Completed results message.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportCompletedEventArgs.IsCanceled">
+            <summary>
+            Returns true if the import operation is canceled
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportFinishedEventArgs">
+            <summary>
+            Arguments for ImportFinished event.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportFinishedEventArgs.IsCanceled">
+            <summary>
+            Returns true if the import was canceled
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ImportFinishedEventArgs.#ctor(System.Boolean)">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="cancel"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.RowImportedEventArgs">
+            <summary>
+            Arguments for see cref="RowImportedEventArgs.RowImported" event
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.RowImportedEventArgs.#ctor(System.Object)">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="object"></param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.RowImportedEventArgs.ImportedObject">
+            <summary>
+            Object that was imported from XML
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelBuilder">
+            <summary>
+            Algometer Limits test results Excel builder
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelBuilder.#ctor(System.String)">
+            <summary>
+            Creates new AlgometerLimitsTestResultsExcelBuilder
+            </summary>
+            <param name="fileName">Name of file to export</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelBuilder.WriteDescription(Medoc.ATS.AlgometerLimitsTestResults)">
+            <summary>
+            Writes description
+            </summary>
+            <param name="item">Algometer Limits test results</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelBuilder.FillResultsTab(Medoc.ATS.AlgometerLimitsTestResults)">
+            <summary>
+            Fill Results tab for Algometer Limits sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelBuilder.WriteData(Medoc.ATS.AlgometerLimitsTrialResult)">
+            <summary>
+            Writes data
+            </summary>
+            <param name="item">Algometer Limits trial result</param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter">
+            <summary>
+            Exporter to excel for algometer Limits test results
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.#ctor(System.String,Medoc.ATS.AlgometerLimitsTestResults)">
+            <summary>
+            Creates new AlgometerLimitsTestResultsExcelExporter
+            </summary>
+            <param name="fileName">Name of file to export</param>
+            <param name="testResult">Algometer Limits test result</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.Dispose">
+            <summary>
+            Cleans up any resources being used
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.Start">
+            <summary>
+            Starts export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerLimitsTestResultsExcelExporter.Stop">
+            <summary>
+            Stops export
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelBuilder" -->
+        <member name="M:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelBuilder.#ctor(System.String)">
+            <summary>
+            Creates new AlgometerRampAndHoldTestResultsExcelBuilder
+            </summary>
+            <param name="fileName">Name of file to export</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelBuilder.WriteDescription(Medoc.ATS.AlgometerRampAndHoldTestResults)" -->
+        <!-- Badly formed XML comment ignored for member "M:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelBuilder.WriteData(Medoc.ATS.AlgometerRampAndHoldTrialResult,System.Double)" -->
+        <!-- Badly formed XML comment ignored for member "T:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter" -->
+        <member name="E:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.#ctor(System.String,Medoc.ATS.AlgometerRampAndHoldTestResults)" -->
+        <member name="M:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.Dispose">
+            <summary>
+            Cleans up any resources being used
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.Start">
+            <summary>
+            Starts export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.AlgometerRampAndHoldTestResultsExcelExporter.Stop">
+            <summary>
+            Stops export
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.BatchTestResultsExporter">
+            <summary>
+            BatchTestResultsExporter
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BatchTestResultsExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BatchTestResultsExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BatchTestResultsExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BatchTestResultsExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BatchTestResultsExporter.#ctor(System.Collections.IList,System.String)">
+            <summary>
+            Creates BatchTestResultsExporter
+            </summary>
+            <param name="resultsList">List of results</param>
+            <param name="fileName">Name of file to export</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BatchTestResultsExporter.Dispose">
+            <summary>
+            Clean up any resources being used
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BatchTestResultsExporter.Start">
+            <summary>
+            Start export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BatchTestResultsExporter.ProcessNextInnerResult">
+            <summary>
+            Starts processing of the next inner result
+            </summary>
+            <returns>
+            True if next result processing started, false if nothing more to do
+            </returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BatchTestResultsExporter.ProcessNextInnerResult(Pathway.WPF.ImportExport.ResultsExportDesription)">
+            <summary>
+            Starts processing of the next inner result
+            </summary>
+            <param name="description">ResultsExportDesription</param>
+            <returns>True if next result processing started, false if nothing more to do</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BatchTestResultsExporter.Stop">
+            <summary>
+            Stop export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BatchTestResultsExporter.GetFileName(Medoc.ATS.TestResults)">
+            <summary>
+            Gets name of the file to export
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Name of the file</returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.BlackBoxExcelBuilder">
+            <summary>
+            Black Box excel builder
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BlackBoxExcelBuilder.#ctor(System.String)">
+            <summary>
+            Creates new BlackBoxExcelBuilder
+            </summary>
+            <param name="fileName">Name of file to export in</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BlackBoxExcelBuilder.WriteData(Medoc.ATS.SystemMonitorRecord,Medoc.TCU.ErrorOccurence)">
+            <summary>
+            Writes data
+            </summary>
+            <param name="record">System monitor record</param>
+            <param name="mainError">Main error</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BlackBoxExcelBuilder.WriteDescription(Medoc.ATS.BlackBox)">
+            <summary>
+            Writes description
+            </summary>
+            <param name="blackBox">Black Box</param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.BlackBoxExcelExporter">
+            <summary>
+            Exporter to excel for Black Box
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BlackBoxExcelExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BlackBoxExcelExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BlackBoxExcelExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BlackBoxExcelExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BlackBoxExcelExporter.#ctor(System.String,Medoc.ATS.BlackBox)">
+            <summary>
+            Creates new BlackBoxExcelExporter
+            </summary>
+            <param name="fileName">Name of file to export</param>
+            <param name="blackBox">Black Box</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BlackBoxExcelExporter.Dispose">
+            <summary>
+            Cleans up any resources being used
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BlackBoxExcelExporter.Start">
+            <summary>
+            Starts export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BlackBoxExcelExporter.Stop">
+            <summary>
+            Stops export
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.BodySiteExcelBuilder">
+            <summary>
+            BodySiteExcelBuilder
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BodySiteExcelBuilder.AddRow(Medoc.ATS.BodySiteData)">
+            <summary>
+            Adds row to the Excel Table
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BodySiteExcelBuilder.#ctor(System.String)">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.BodySiteExcelExporter">
+            <summary>
+            Exports BodySiteDataCollection to Excel
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BodySiteExcelExporter.#ctor(System.Collections.Generic.List{Medoc.ATS.BodySiteData},System.String)">
+            <summary>
+            Creates Instance of this class
+            </summary>
+            <param name="coll"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BodySiteExcelExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BodySiteExcelExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BodySiteExcelExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.BodySiteExcelExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ChainTestResultsExporter">
+            <summary>
+            ChainTestResultsExporter
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ChainTestResultsExporter.ProcessNextInnerResult">
+            <summary>
+            Starts processing of the next inner result
+            </summary>
+            <returns>
+            True if next result processing started, false if nothing more to do
+            </returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ChainTestResultsExporter.GetFileName(Medoc.ATS.TestResults)">
+            <summary>
+            Gets name of the file to export
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Name of the file</returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ResultsExcelBuilder">
+            <summary>
+            ResultsExcelBuilder
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.#ctor(System.String)">
+            <summary>
+            Creates ResultsExcelBuilder
+            </summary>
+            <param name="filename">Name of the file to export</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.AddTemperatureRow(Pathway.WPF.ImportExport.ResultsExportRow)">
+            <summary>
+            Adds new row
+            </summary>
+            <param name="r">Row</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.AddAmplitudeRow(Pathway.WPF.ImportExport.ResultsExportRow)">
+            <summary>
+            Adds new row
+            </summary>
+            <param name="r">Row</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.SetDescription(Pathway.WPF.ImportExport.ResultsExportDesription)">
+            <summary>
+            Out data to Excel column
+            </summary>
+            <param name="description">ResultsExportDesription</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.LimitsSequenceStatistics})">
+            <summary>
+            Fill Results tab for Limits sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.VSALimitsSequenceStatistics})">
+            <summary>
+            Fill Results tab for VSALimits sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.LevelSequenceStatistics})">
+            <summary>
+            Fill Results tab for Level sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.VSALevelSequenceStatistics})">
+            <summary>
+            Fill Results tab for VSALevel sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.TSLSequenceStatistics})">
+            <summary>
+            Fill Results tab for TSL sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.SuprathresholdSequenceStatistics})">
+            <summary>
+            Fill Results tab for Suprathreshold sequence statistics
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelBuilder.FillResultsTab(System.Collections.Generic.List{Medoc.ATS.RampAndHoldSequenceStatistics})">
+            <summary>
+            Fill Results tab for RampAndHold sequence statistics
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.AbortedEventHandler">
+            <summary>
+            Delegate for ExcelImporter.Aborted event 
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ParsingFieldEventHandler">
+            <summary>
+             Delegate for ExcelImporter.ParsingField event 
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportCompletedEventHandler">
+            <summary>
+            Delegate for ExcelImporter.Process event
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ExcelImporter">
+            <summary>
+            This class imports data from Excel document to the specified object.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelImporter.#ctor(System.String,System.Type,System.String[])">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="fileName"></param>
+            <param name="sheetName"></param>
+            <param name="toObjectType"></param>
+            <param name="bindings"></param>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ExcelImporter.RowImported">
+            <summary>
+            Invokes when the row successfully imported from excel.
+            </summary>
+            <remarks>This event is raised in a separate thread.</remarks>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ExcelImporter.ImportCompleted">
+            <summary>
+            Invokes when the row importing successfully completed.
+            </summary>
+            <remarks>This event is raised in a separate thread.</remarks>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ExcelImporter.Process">
+            <summary>
+            Process the current import
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ExcelImporter.Aborted">
+            <summary>
+            Raised when import is aborted as a result of exception
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ExcelImporter.ParsingField">
+            <summary>
+            Raised when field needs to manual parsing
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelImporter.Cancel">
+            <summary>
+            Cancel the current import
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelImporter.StartImportFromExcel(System.String)">
+            <summary>
+            The method starts import from excel.
+            </summary>
+            <param name="fileName"></param>
+            <remarks>The method is safely thread</remarks>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.NormativeDataExcelBuilder">
+            <summary>
+            NormativeDataExcelBuilder
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.NormativeDataExcelBuilder.AddRow(Medoc.ATS.NormativeData)">
+            <summary>
+            Adds row to the Excel Table
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.NormativeDataExcelBuilder.#ctor(System.String)">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.NormativeDataExcelExporter">
+            <summary>
+            Exports BodySiteDataCollection to Excel
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.NormativeDataExcelExporter.#ctor(System.Collections.Generic.List{Medoc.ATS.NormativeData},System.String)">
+            <summary>
+            Creates Instance of this class
+            </summary>
+            <param name="coll"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.NormativeDataExcelExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.NormativeDataExcelExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.NormativeDataExcelExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.NormativeDataExcelExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter">
+            <summary>
+            ThermodeTestResultsExcelExporter - exports ThermodeTestResults into excel file
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.#ctor(Medoc.ATS.ThermodeTestResults,Pathway.WPF.ImportExport.ResultsExportDesription,System.String)">
+            <summary>
+            Creates ThermodeTestResultsExcelExporter
+            </summary>
+            <param name="results">ThermodeTestResults</param>
+            <param name="exportDesc">ResultsExportDesription</param>
+            <param name="fileName">Name of the file to export</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.Dispose">
+            <summary>
+            Clean up any resources being used
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.Start">
+            <summary>
+            Start export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ThermodeTestResultsExcelExporter.Stop">
+            <summary>
+            Stop export
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ResultsExcelExporterFactory">
+            <summary>
+            ResultsExcelExporterFactory
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ResultsExcelExporterFactory.Create(Medoc.ATS.TestResults,Pathway.WPF.ImportExport.ResultsExportDesription,System.String)">
+            <summary>
+            Create TestResultsExcelExporter
+            </summary>
+            <param name="results">TestResults</param>
+            <param name="exportDescription">ResultsExportDesription</param>
+            <param name="fileName">Name of file to export</param>
+            <returns>TestResultsExcelExporter</returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ExportAction">
+            <summary>
+            Export controller
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportAction.#ctor(Pathway.WPF.ImportExport.IExporter,Cinch.IUIVisualizerService)">
+            <summary>
+            Creates new ExportAction
+            </summary>
+            <param name="exporter">Exporter</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportAction.Run">
+            <summary>
+            Runs export process
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Exporter">
+            <summary>
+            Exporter allows exporting data fom the system into binary file.
+            The following objects could be exported using the exporter:
+            	Patient
+            	TestResults
+            	TestProgram
+            	
+            The structure of the export file: 
+            	FileHeader
+            	ExportDescriptor
+            	ObjectsData
+            	ObjectsTable
+            	ExportList	 	
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.#ctor(System.String)">
+            <summary>
+            Creates the exporter and initializes the export file. 
+            If the specified file already exists, it is overwritten. 
+            </summary>
+            <param name="fileName">
+            The full name (with path) to the export file.
+            </param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.Exporter"/> class.
+            </summary>
+            <param name="destinationStream">The destination stream.</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Dispose">
+            <summary>
+            Frees resources used by the exporter. 
+            In case the export wasn't finished, the export file is deleted.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Add(Medoc.ATS.Patient)">
+            <summary>
+            Adds a patient to the export file
+            </summary>
+            <param name="patient"></param>
+            <exception cref="T:System.ArgumentNullException">
+            The patient is null
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            The object is not stored in the database
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            The export is finished (Finish() method was called)
+            </exception>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Add(Medoc.ATS.TestProgram)">
+            <summary>
+            Add TestProgram 
+            </summary>
+            <param name="testProgram">TestProgram </param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Add(Medoc.ATS.BodySiteData)">
+            <summary>
+            Add BodySiteData
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Add(Medoc.ATS.NormativeData)">
+            <summary>
+            Add NormativeData
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Add(Medoc.ATS.TestResults)">
+            <summary>
+            Add TestResults
+            </summary>
+            <param name="testResult"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Finish">
+            <summary>
+            Completes the export. Objects can't be added after this method is called.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Export(Medoc.ATS.Department)">
+            <summary>
+            Exports only the department itself, without its patients
+            </summary>
+            <param name="department"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Exporter.Export(Medoc.ATS.ICD9)">
+            <summary>
+            Exports ICD9
+            </summary>
+            <param name="department"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ExportObjectDescriptor">
+            <summary>
+            Export Object Descriptor
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportObjectDescriptor.#ctor">
+            <summary>
+            Export Object Descriptor
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportObjectDescriptor.#ctor(System.Guid,System.Int32,System.Int64)">
+            <summary>
+            Export Object Descriptor
+            </summary>
+            <param name="id"></param>
+            <param name="length"></param>
+            <param name="offset"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.BinaryReader">
+            <summary>
+            Binary Reader
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.BinaryReader.Read(System.IO.FileStream,System.Int64,System.Int32)">
+            <summary>
+            Reads at specified offset a specified number of bytes.
+            </summary>
+            <param name="stream"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+            <returns>object</returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ExcelBuilder">
+            <summary>
+            Excel builder
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelBuilder.#ctor(System.String)">
+            <summary>
+            Creates new ExcelBuilder
+            </summary>
+            <param name="fileName">Name of file to export in</param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ExcelBuilder.Book">
+            <summary>
+            Book
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ExcelBuilder.DataSheet">
+            <summary>
+            Data sheet
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ExcelBuilder.DescriptionSheet">
+            <summary>
+            Description sheet
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ExcelBuilder.ResultsSheet">
+            <summary>
+            Result sheet
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelBuilder.AddHeader(System.String)">
+            <summary>
+            Adds header
+            </summary>
+            <param name="title">Title</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelBuilder.AddEntry(System.String,System.String,CarlosAg.ExcelXmlWriter.DataType)">
+            <summary>
+            Adds entry
+            </summary>
+            <param name="name">Name</param>
+            <param name="value">Value</param>
+            <param name="type">Type</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelBuilder.Save">
+            <summary>
+            Saves data
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ExportFileHeader">
+            <summary>
+            Export File Header
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportFileHeader.#ctor">
+            <summary>
+            Export File Header
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportFileHeader.#ctor(System.Int64)">
+            <summary>
+            Export File Header
+            </summary>
+            <param name="version">File Format Version</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportFileHeader.Read(System.IO.Stream)">
+            <summary>
+            Reads file header from the stream. Currently only first version of 
+            the file format is supported. As new versions of the file format 
+            appear, this function could be updated to support all the existing versions (if required).
+            
+            Thrown on error during reading from stream or when 
+            the format of the file is not supported.
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExportFileHeader.Write(System.IO.Stream)">
+            <summary>
+            Writes this header to the stream
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.EXPORT_ID">
+            <summary>
+            Special GUID constants used for export/import
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FileExportToAtsTask">
+            <summary>
+            Saves content to Ftp server with ats file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToAtsTask.#ctor(System.Windows.Threading.Dispatcher,Pathway.WPF.Models.FileExporterConfig,System.Collections.IList,System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToAtsTask"/> class.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToAtsTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToAtsTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FileExportToCsvTask">
+            <summary>
+            Saves content to local pc with csv file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToCsvTask.#ctor(System.Windows.Threading.Dispatcher,Pathway.WPF.Models.FileExporterConfig,System.Collections.Generic.List{Medoc.ATS.TestResults},System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToCsvTask"/> class.
+            </summary>
+            <param name="conn">Instance of FtpClient class</param>
+            <param name="config">FTP server configuration</param>
+            <param name="testResults">Test results</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToCsvTask.GetFileName(Medoc.ATS.TestResults)">
+            <summary>
+            Gets name of the file to export
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Name of the file</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToCsvTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToCsvTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FileExportToPdfTask">
+            <summary>
+            Saves content to Ftp server with pdf file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToPdfTask.#ctor(System.Windows.Threading.Dispatcher,Pathway.WPF.Models.FileExporterConfig,System.Collections.IList,System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToAtsTask"/> class.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToPdfTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToPdfTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FileExportToExcelTask">
+            <summary>
+            Saves content to Ftp server with excel file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToExcelTask.#ctor(System.Windows.Threading.Dispatcher,Pathway.WPF.Models.FileExporterConfig,System.Collections.IList,System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToAtsTask"/> class.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToExcelTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToExcelTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FileExportToRtfTask">
+            <summary>
+            Saves content to Ftp server with rtf file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToRtfTask.#ctor(System.Windows.Threading.Dispatcher,Pathway.WPF.Models.FileExporterConfig,System.Collections.IList,System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToAtsTask"/> class.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToRtfTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FileExportToRtfTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FtpExporter">
+            <summary>
+            Binary Exporter
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExporter.#ctor(System.Collections.Generic.List{Medoc.ATS.TestResults})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExporter"/> class.
+            </summary>
+            <param name="objects">Source objects for export to ftp server</param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.FtpExporter.IsConfigured">
+            <summary>
+            Indicate while Ftp Exporter is configured
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.FtpExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.FtpExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.FtpExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.FtpExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExporter.Start">
+            <summary>
+            Starts export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExporter.Stop">
+            <summary>
+            Stops export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExporter.CheckConnection(Pathway.WPF.Models.FileExporterConfig)">
+            <summary>
+            Checks FTP server connection.
+            </summary>
+            <param name="config">FTP server configuration</param>
+            <returns>True - if successful, otherwise - false</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExporter.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FtpExportTask">
+            <summary>
+            Base class for FtpExportTasks, provides functionality for save content to one file on remote Ftp server
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportTask.#ctor(System.Net.FtpClient.FtpClient,Pathway.WPF.Models.FileExporterConfig,System.Action{System.String},System.Action{System.Double},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportTask"/> class.
+            </summary>
+            <param name="conn">FtpClient</param>
+            <param name="config">FTP server connfiguration</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportTask.Execute(System.Double,System.Double)">
+            <summary>
+            Saves content to remote Ftp server
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportTask.Rollback">
+            <summary>
+            Rollbacks task changes
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.FtpExportTask.IsExecuted">
+            <summary>
+            Task status, returns true - if executed, otherwise - false
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>		
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>		
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FtpExportToAtsTask">
+            <summary>
+            Saves content to Ftp server with ats file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToAtsTask.#ctor(System.Net.FtpClient.FtpClient,Pathway.WPF.Models.FileExporterConfig,System.Collections.IList,System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToAtsTask"/> class.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToAtsTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToAtsTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FtpExportToCsvTask">
+            <summary>
+            Saves content to Ftp server with csv file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToCsvTask.#ctor(System.Net.FtpClient.FtpClient,Pathway.WPF.Models.FileExporterConfig,System.Collections.Generic.List{Medoc.ATS.TestResults},System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToCsvTask"/> class.
+            </summary>
+            <param name="conn">Instance of FtpClient class</param>
+            <param name="config">FTP server configuration</param>
+            <param name="testResults">Test results</param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToCsvTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToCsvTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FtpExportToPdfTask">
+            <summary>
+            Saves content to Ftp server with ats file format
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToPdfTask.#ctor(System.Net.FtpClient.FtpClient,Pathway.WPF.Models.FileExporterConfig,System.Collections.IList,System.Action{System.String},System.Action{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.FtpExportToAtsTask"/> class.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToPdfTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToPdfTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.FtpExportToRtfTask">
+            <summary>
+            Saves content to Ftp server with ats file format
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Pathway.WPF.ImportExport.FtpExportToRtfTask.#ctor(System.Net.FtpClient.FtpClient,Pathway.WPF.Models.FileExporterConfig,System.Collections.IList,System.Action{System.String},System.Action{System.Double})" -->
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToRtfTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.FtpExportToRtfTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.LocalFileExporter">
+            <summary>
+            Binary Exporter
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExporter.#ctor(System.Windows.Threading.Dispatcher,System.Collections.Generic.List{Medoc.ATS.TestResults})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Pathway.WPF.ImportExport.LocalFileExporter"/> class.
+            </summary>
+            <param name="objects">Source objects for export to ftp server</param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.LocalFileExporter.IsConfigured">
+            <summary>
+            Indicate while Ftp Exporter is configured
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.LocalFileExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.LocalFileExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.LocalFileExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.LocalFileExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExporter.Start">
+            <summary>
+            Starts export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExporter.Stop">
+            <summary>
+            Stops export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExporter.CheckConnection(Pathway.WPF.Models.FileExporterConfig)">
+            <summary>
+            Checks FTP server connection.
+            </summary>
+            <param name="config">FTP server configuration</param>
+            <returns>True - if successful, otherwise - false</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExporter.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.LocalFileExportTask">
+            <summary>
+            Base class for FileExportTasks, provides functionality for save content to one file on remote Ftp server
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.LocalFileExportTask._viewDispatcher">
+            <summary>
+            Initializes a new instance of the <see cref="!:FileExportTask"/> class.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExportTask.Execute(System.Double,System.Double)">
+            <summary>
+            Saves content to remote Ftp server
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExportTask.Rollback">
+            <summary>
+            Rollbacks task changes
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.LocalFileExportTask.IsExecuted">
+            <summary>
+            Task status, returns true - if executed, otherwise - false
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExportTask.GetFileContent">
+            <summary>
+            Returns file contents
+            </summary>		
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExportTask.RunExport">
+            <summary>
+            Start Export 
+            </summary>		
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.LocalFileExportTask.GetFilePath">
+            <summary>
+            Returns destination file full path
+            </summary>		
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ExcelImportData">
+            <summary>
+            This class imports excel data from previously exported file.
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ExcelImportData.ParsingField">
+            <summary>
+            Raised when field needs to manual parsing
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ExcelImportData.RowImported">
+            <summary>
+            Invokes when the row successfully imported from excel.
+            </summary>
+            <remarks>This event is raised in a separate thread.</remarks>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelImportData.StartImport(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ExcelImportData.OpenConflictDialog(AUI.ImportProcessWindow)">
+            <summary>
+            Opens a dialog window for displaying conflict data.
+            </summary>
+            <param name="window">dialog to open</param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportAction">
+            <summary>
+            PrintReportAction
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ImportAction.#ctor(Cinch.IUIVisualizerService,System.Windows.Threading.Dispatcher)">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ImportAction.Run">
+            <summary>
+            Starts the import process from specified file.	
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Importer">
+            <summary>
+            Importer is used to import the data from export file into the local database.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.#ctor(System.String)">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.LoadObjects(System.String,System.Boolean)">
+            <summary>
+            Loads all objects from source file
+            </summary>
+            <param name="file">Source file path</param>
+            <param name="justFirst">Sign to load just first object from file</param>
+            <returns></returns>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Importer.ExportDescriptor">
+            <summary>
+            Returns export descriptor from the current export file
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Importer.TotalObjectsCount">
+            <summary>
+            Returns total number of objects in the export file
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Importer.ImportedObjectsCount">
+            <summary>
+            Returns current number of imported objects
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Importer.IsFinished">
+            <summary>
+            True if the import was finished
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.Start">
+            <summary>
+            Starts the import process
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.Stop">
+            <summary>
+            Stops the import process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.Finished">
+            <summary>
+            Raised when the import is finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.ObjectImportStarted">
+            <summary>
+            Raised when starting to import object
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.ObjectImportCompleted">
+            <summary>
+            Raised when finished to import object
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.ObjectImportSkipped">
+            <summary>
+            Raised when import of the object is skipped
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.ProgressEvent">
+            <summary>
+            Raised when import of the object completed
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.ProgressMessageEvent">
+            <summary>
+            Raised when import of the object completed
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.RowImported">
+            <summary>
+            Raised when row was imported
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.ConflictDetected">
+            <summary>
+            Raised when a conflict is detected during import. The client should 
+            set fields in the ImportConflict (the event's argument) that will 
+            instruct the Importer how to resolve the conflict. The client is required 
+            to subscribe to this event, otherwise the import can't be started.
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.Importer.ChangeNameEvent">
+            <summary>
+            Raised when need change test program name in test result during import.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.OnRowImported(Pathway.WPF.ImportExport.RowImportedEventArgs)">
+            <summary>
+            This method fires RowImported event
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.SelectImportPatient(Medoc.ATS.Patient,System.Collections.IList,System.Object,System.Boolean)">
+            <summary>
+            Giving the patient from the export file and the list of local conflicting
+            patients, return the patient that will be used for import using 
+            conflict resolution if needed. The unique fields of the patient could be 
+            updated if user overrides them during conflict resolution.
+            </summary>
+            <param name="importPatient"></param>
+            <param name="conflictingPatients"></param>
+            <param name="isIdConflict"></param>
+            <param name="isSsnConflict"></param>
+            <param name="isDrvLicConflict"></param>
+            <param name="topObject"></param>
+            <returns>
+            The patient that should be used for import or null if the patient should
+            be skipped or the import is canceled.
+            </returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.MergePatientsUniqueFields(Medoc.ATS.Patient,Medoc.ATS.Patient,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Merges unique fields of the patient from the import file with the fields
+            of the local patient selected to replace that patient
+            </summary>
+            <param name="localPatient"></param>
+            <param name="importPatient"></param>
+            <param name="isIdConflict"></param>
+            <param name="isSsnConflict"></param>
+            <param name="isDrvLicConflict"></param>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.GetUniqueNameDepartment(Medoc.ATS.Department,System.Object)">
+            <summary>
+            Uses conflict resolution to obtain department with unique name.
+            Returns either local department that should be used instead of 
+            import department,  of the import department with updated name.
+            </summary>
+            <param name="importDepartment"></param>
+            <returns>The department or null if should abandon this import</returns>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Importer.SetUniqueProgramName(Medoc.ATS.TestProgram)">
+            <summary>
+            SetUniqueProgramName
+            </summary>
+            <param name="program"></param>
+            <param name="showMessage"></param>
+            <param name="messageBoxService"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.Finished">
+            <summary>
+            Raised when the import is finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.ObjectImportStarted">
+            <summary>
+            Raised when starting to import object
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.ObjectImportCompleted">
+            <summary>
+            Raised when finished to import object
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.ObjectImportSkipped">
+            <summary>
+            Raised when import of the object is skipped
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.ProgressEvent">
+            <summary>
+            Raised when import of the object completed
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.RowImported">
+            <summary>
+            Raised when row was imported
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.ConflictDetected">
+            <summary>
+            Raised when a conflict is detected during import. The client should 
+            set fields in the ImportConflict (the event's argument) that will 
+            instruct the Importer how to resolve the conflict. The client is required 
+            to subscribe to this event, otherwise the import can't be started.
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.ImportWrapper.ChangeNameEvent">
+            <summary>
+            Raised when need change test program name in test result during import.
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ImportConflict">
+            <summary>
+            Contains all information about import conflict and uses for conflict resolution.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ImportConflict.#ctor(Pathway.WPF.ImportExport.ImportConflictDescription)">
+            <summary>
+            
+            </summary>
+            <param name="description"></param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.ImportObject">
+            <summary>
+            The object being imported that conflicts with other object(s) in the
+            local database. 
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.TopImportObject">
+            <summary>
+            The top level object which import causes import of the current object. 
+            If the import object is the "top object" itself, this property contains reference 
+            to the sane object as ImportObject.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.LocalObjects">
+            <summary>
+            The readonly list of local objects conflicting with the imported object.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.CanUseLocalObject">
+            <summary>
+            True if one of the local objects can be used as a resolution object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.CanUseImportObject">
+            <summary>
+            True if the import object can be used as a resolution object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.IsEditImportObject">
+            <summary>
+            True if the import object could be edited in order to be used as 
+            a resolution object. Used in conjuction with CanUseImportObect 
+            (should be always false when CanUseImportObect = false)
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.MustEditImportObject">
+            <summary>
+            True if the import object MUST be edited in order to be used as 
+            a resolution object. Used in conjuction with CanUseImportObect and IsEditImportObject
+            (should be always false when one of those properties is false)
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Pathway.WPF.ImportExport.ImportConflict.ResolutionObject" -->
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.IsSkip">
+            <summary>
+            Clienst should set this property to true if this object is to be skipped
+            during import. If this object is imported in the context of import
+            of another "Top object", that object will be also skipped in the import.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.IsStop">
+            <summary>
+            Clients should set this property to true in order to stop the import.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ImportConflict.IsAddImportObject">
+            <summary>
+            True if the import object will add
+            False if local object will overwrite
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflict.Message">
+            <summary>
+            Gets the Message of ConflictGrid.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflict.Caption">
+            <summary>
+            Gets the Caption of ConflictGrid.
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Interfaces.IConflict.DisplayData(Pathway.WPF.ImportExport.ImportConflict)">
+            <summary>
+            Updates the grid control with new data and displays it.
+            </summary>
+            <param name="arguments">conflict arguments to display</param>
+            <returns>conflict data message to display for user</returns>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflict.SelectedItem">
+            <summary>
+            Gets the selection made by the user inorder to resolve the conflict.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflict.GetLocalObject">
+            <summary>
+            Returns local object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflict.GetImportObject">
+            <summary>
+            Returns Import Object
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflict.ColumnsList">
+            <summary>
+            ColumnsList
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflict.DataList">
+            <summary>
+            DataList
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Interfaces.IConflict.SkipMessage">
+            <summary>
+            Returns message relevant for current conflict, which we want to display
+            to the user on "skip" event.
+            </summary>
+            <returns>relevant message for current conflict</returns>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Interfaces.IConflictData.AllowEdit">
+            <summary>
+            Gets the Message of ConflictGrid.
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.IExporter">
+            <summary>
+            Exporter interface
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.IExporter.Start">
+            <summary>
+            Starts export
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.IExporter.Stop">
+            <summary>
+            Stops export
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.IExporter.Progress">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.IExporter.Aborted">
+            <summary>
+            Raised when export aborted
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.IExporter.Finished">
+            <summary>
+            Raised when export finished
+            </summary>
+        </member>
+        <member name="E:Pathway.WPF.ImportExport.IExporter.ProgressMessage">
+            <summary>
+            Raised during export process
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ParsingFieldEventArgs">
+            <summary>
+            Arguments for ExcelImporter.ParsingField
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ParsingFieldEventArgs.FieldName">
+            <summary>
+            Field name to parse
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ParsingFieldEventArgs.FieldType">
+            <summary>
+            Field Type
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ParsingFieldEventArgs.ValueToParse">
+            <summary>
+            Value that must be parsed
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ParsingFieldEventArgs.ParsedValue">
+            <summary>
+            The new Parsed value that must filled Field
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ParsingFieldEventArgs.ParsedValueIsChanged">
+            <summary>
+            Returns true is ParsedValue property is changed
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ParsingFieldEventArgs.#ctor(System.String,System.Type,System.String)">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="fieldName"></param>
+            <param name="fieldType"></param>
+            <param name="valueToParse"></param>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ViewModels.ExportViewModel">
+            <summary>
+            Export View model
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.ViewModels.ExportViewModel.#ctor(Pathway.WPF.ImportExport.IExporter)">
+            <summary>
+            ExportViewModel
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ExportViewModel.OKExportCommand">
+            <summary>
+            OK command
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ExportViewModel.CancelExportCommand">
+            <summary>
+            Cancel command
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ExportViewModel.IsFinished">
+            <summary>
+            IsFinished
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ExportViewModel.IsNotFinished">
+            <summary>
+            IsNotFinished
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ExportViewModel.Text">
+            <summary>
+            Text
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ExportViewModel.ProgressPosition">
+            <summary>
+            ProgressPosition
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ViewModels.ImportExcelProcessViewModel">
+            <summary>
+            ImportProcessViewModel
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ImportExcelProcessViewModel.IsFinished">
+            <summary>
+            IsFinished
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ImportExcelProcessViewModel.IsNotFinished">
+            <summary>
+            IsNotFinished
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ViewModels.ImportExcelProcessViewModel.textChangeArgs">
+            <summary>
+            Text
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ViewModels.ImportExcelProcessViewModel.progressPositionChangeArgs">
+            <summary>
+            ProgressPosition
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ViewModels.ImportProcessViewModel">
+            <summary>
+            ImportProcessViewModel
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ImportProcessViewModel.IsFinished">
+            <summary>
+            IsFinished
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ImportProcessViewModel.IsNotFinished">
+            <summary>
+            IsNotFinished
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ViewModels.ImportProcessViewModel.textChangeArgs">
+            <summary>
+            Text
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ViewModels.ImportProcessViewModel.progressPositionChangeArgs">
+            <summary>
+            ProgressPosition
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel">
+            <summary>
+            ResolveConflictViewModel
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.UniqueColor">
+            <summary>
+            conflict fields text color
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.KeepBothToolTip">
+            <summary>
+            ToolTip for Keep both button
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.IsKeepBothVisible">
+            <summary>
+            Is KeepBoth Visible
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.IsKeepBothEnabled">
+            <summary>
+            Is KeepBoth Enable
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.SkipButtonVisibility">
+            <summary>
+            SkipButtonVisibility
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.OkButtonEnabled">
+            <summary>
+            OkButtonEnabled
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.SkipButtonEnabled">
+            <summary>
+            SkipButtonEnabled
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.columnsListChangeArgs">
+            <summary>
+            ColumnsList
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.textChangeArgs">
+            <summary>
+            Text
+            </summary>
+        </member>
+        <member name="F:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.dataListChangeArgs">
+            <summary>
+            DataList
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.OkButtonText">
+            <summary>
+            OkButtonText
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.ViewModels.ResolveConflictViewModel.SkipButtonText">
+            <summary>
+            SkipButtonText
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Views.ExcelImportDataView">
+            <summary>
+            Interaction logic for ExcelImportDataView.xaml
+            </summary>
+            <summary>
+            ExcelImportDataView
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Views.ExcelImportDataView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Views.ExportView">
+            <summary>
+            Interaction logic for ExportView.xaml
+            </summary>
+            <summary>
+            ExportView
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Views.ExportView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Views.ImportProcessView">
+            <summary>
+            Interaction logic for ImportProcessView.xaml
+            </summary>
+            <summary>
+            ImportProcessView
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Views.ImportProcessView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Views.ResolveConflictView">
+            <summary>
+            Interaction logic for ResolveConflictView.xaml
+            </summary>
+            <summary>
+            ResolveConflictView
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.Views.ResolveConflictView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Pathway.WPF.ImportExport.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Medoc.ATS.ExportDescriptors">
+            <summary>
+            Export Descriptors
+            </summary>
+        </member>
+        <member name="F:Medoc.ATS.ExportDescriptors.ExportList">
+            <summary>
+            list of ExportObjectDescriptor(s) containing all "main" 
+            objects in the export file (those that were explicitly added 
+            to the export file)
+            </summary>
+        </member>
+        <member name="M:Medoc.ATS.ExportDescriptors.#ctor">
+            <summary>
+            Creates new empty ExportDescriptors
+            </summary>
+        </member>
+        <member name="M:Medoc.ATS.ExportDescriptors.#ctor(System.IO.FileStream)">
+            <summary>
+            Creates ExportDescriptors from the file stream (of the export file)
+            </summary>
+            <param name="fileStream"></param>
+        </member>
+        <member name="T:AUI.ChangeTestProgramNameWindow">
+            <summary>
+            Summary description for ChangeTestProgramNameWindow.
+            </summary>
+        </member>
+        <member name="F:AUI.ChangeTestProgramNameWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:AUI.ChangeTestProgramNameWindow.GetImportFile">
+            <summary>
+            Opens FileDialog inorder for user to choose the file he wants to import.
+            </summary>
+            <returns> the name of the choosen file</returns>
+        </member>
+        <member name="M:AUI.ChangeTestProgramNameWindow.LoadResources">
+            <summary>
+            Loads local settings and sets buttons text.
+            </summary>
+        </member>
+        <member name="M:AUI.ChangeTestProgramNameWindow.SetConflictArguments(Pathway.WPF.ImportExport.ImportConflict)">
+            <summary>
+            Sets the conflict arguments which should be shown to the user and changed
+            by him in order to resolve the conflict.
+            </summary>
+            <param name="arguments"> conflict data recieved from the importer</param>
+        </member>
+        <member name="M:AUI.ChangeTestProgramNameWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:AUI.ChangeTestProgramNameWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:AUI.ChangeTestProgramNameWindow.UpdateProgramName">
+            <summary>
+            Updates conflict program name
+            </summary>
+        </member>
+        <member name="T:AUI.ImportProcessWindow">
+            <summary>
+            Summary description for ImportProcessWindow.
+            </summary>
+        </member>
+        <member name="T:AUI.ImportRewriteWindow">
+            <summary>
+            Summary description for ImportProcessWindow.
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ATSReportExport">
+            <summary>
+            ATSReport class work with report
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.#ctor">
+            <summary>
+            Create new ATSReport class
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.InitReport(System.Windows.Threading.Dispatcher,System.Collections.Generic.List{Medoc.ATS.TestResults},Pathway.WPF.Models.ReportPrintSettings)">
+            <summary>
+            Init and compile report
+            </summary>
+            <param name="results">List of TestResults</param>
+            <param name="settings">Print settings</param>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.TestResults">
+            <summary>
+            Collection of TestResults
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.Settings">
+            <summary>
+            Print settings
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.FirmwareVersion">
+            <summary>
+            FirmwareVersion
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetProbe(Medoc.ATS.TestResults)">
+            <summary>
+            Get Probe
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Probe</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientID(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient ID
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>ID of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientDepartment(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Department
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Department of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientFirstName(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient FirstName
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>FirstName of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientLastName(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient LastName
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>LastName of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientDateOfBirth(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient DateOfBirth
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>DateOfBirth of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientSex(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Sex
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Sex of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientHistory(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient History
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>History of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientDriverLicenseID(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient DriverLicenseID
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>DriverLicenseID of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientSocialSecurityNumber(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient SocialSecurityNumber
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>SocialSecurityNumber of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientTelephone(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Telephone
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Telephone of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientAddress(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Address
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Address of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientEmail(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Email
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Email of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientEducation(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Education
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Education of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientOccupation(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Occupation
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Occupation of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientWeight(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient Weight
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>Weight of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientICD9(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient ICD9
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>ICD9 of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.GetPatientRefNo(Medoc.ATS.TestResults)">
+            <summary>
+            Get Patient RefNo
+            </summary>
+            <param name="result">TestResults</param>
+            <returns>RefNo of Patient</returns>
+        </member>
+        <member name="M:AUI.Reports.Export.ATSReportExport.ShowBodySite(AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl)">
+            <summary>
+            Shows/hides body side image according to the test settings and test results
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.FirstNameFieldLabel">
+            <summary>
+            Patient "First name" field label
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.LastNameFieldLabel">
+            <summary>
+            Patient "Last name" field label
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.SiteName">
+            <summary>
+            Returns Site name
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.CommentsIsVisible">
+            <summary>
+            Return true if need to show report coments, otherwise - false
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSReportExport.ReportComments">
+            <summary>
+            Report comments
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ATSSinglesReportExport">
+            <summary>
+            ATSSinglesReport class work with singels type of report
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.GraphImage">
+            <summary>
+            Graph Image
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.BodySiteImage">
+            <summary>
+            Image of BodySite
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.StatisticsBitmap">
+            <summary>
+            Image of Statistics
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.HeaderPressureAVG">
+            <summary>
+            Header Pressure AVG
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.HeaderPressureSTD">
+            <summary>
+            Header Pressure STD
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.HeaderPpeakMax">
+            <summary>
+            Header Ppeak Max
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.HeaderPpeakMin">
+            <summary>
+            Header Ppeak Min
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.HeaderRateAVG">
+            <summary>
+            Header Rate AVG
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.HeaderRateSTD">
+            <summary>
+            Header Rate STD
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ATSSinglesReportExport.TestDate">
+            <summary>
+            Test result end time
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.CPMPulseReportBase">
+            <summary>
+            Base class for Pulce test report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.CPMPulseReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.CPMReportBase.CPMBodySiteImage">
+            <summary>
+            Image of BodySite
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:AUI.Reports.Export.CPMRHReportBase" -->
+        <member name="M:AUI.Reports.Export.CPMRHReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ReportsHelper">
+            <summary>
+            Report data generation helper
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ReportsHelper.FillDataForRH(Stimulsoft.Report.Dictionary.StiDataTableSource,System.Collections.Generic.List{Medoc.ATS.TestResults},System.Int32)">
+            <summary>
+            Prepares data for report with RampAndHold test results
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ReportsHelper.FillDataForVASSearch(Stimulsoft.Report.Dictionary.StiDataTableSource,System.Collections.Generic.List{Medoc.ATS.TestResults},System.Boolean@)">
+            <summary>
+            Prepares data for report with VASSearch test results
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ReportsHelper.FillDataForLimits(Stimulsoft.Report.Dictionary.StiDataTableSource,System.Collections.Generic.List{Medoc.ATS.TestResults},System.Boolean@)">
+            <summary>
+            Prepares data for report with Limits test results
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ReportsHelper.FillDataForCalibrationReport(Stimulsoft.Report.Dictionary.StiDataTableSource,Pathway.WPF.Models.ThermodeCalibrationReport,System.Boolean@)">
+            <summary>
+            Prepares data for calibration status report 
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ReportsHelper.FillDataForLevels(Stimulsoft.Report.Dictionary.StiDataTableSource,System.Collections.Generic.List{Medoc.ATS.TestResults},System.Boolean@)">
+            <summary>
+            Prepares data for report with Levels test results
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ReportsHelper.FillDataForTSL(Stimulsoft.Report.Dictionary.StiDataTableSource,System.Collections.Generic.List{Medoc.ATS.TestResults},System.Boolean@)">
+            <summary>
+            Prepares data for report with TSL test results
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:AUI.Reports.Export.RHEligibilityCriteriaReportBase" -->
+        <member name="M:AUI.Reports.Export.RHEligibilityCriteriaReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,Stimulsoft.Report.Dictionary.StiDataTableSource,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:AUI.Reports.Export.RHPainRatingReportBase" -->
+        <member name="M:AUI.Reports.Export.RHPainRatingReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,Stimulsoft.Report.Dictionary.StiDataTableSource,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:AUI.Reports.Export.RHReportBase" -->
+        <member name="M:AUI.Reports.Export.RHReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.SimpleReportBase">
+            <summary>
+            Base class for Simple report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.StaircaseReportBase">
+            <summary>
+            Base class for Staircase test report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.StaircaseReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Dictionary.StiDataTableSource,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.SuprathresholdReportBase">
+            <summary>
+            Base class for Suprathreshold test report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.SuprathresholdReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.TSLReportBase">
+            <summary>
+            Base class for TSL test report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.TSLReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.VASSearchReportBase">
+            <summary>
+            Base class for VAS Search test report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.VASSearchReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.VSALevelsReportBase">
+            <summary>
+            Base class for VSA-Levels report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.VSALevelsReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.VSALimitsReportBase">
+            <summary>
+            Base class for VSA-Limits report, contains all necessary c# code
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.VSALimitsReportBase.OnPageRendering(Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiImage,Stimulsoft.Report.Components.StiText,AUI.Reports.Export.Controls.RptImgBodySiteCtrl,AUI.Reports.Export.Controls.RptImgGraphResultCtrl,Stimulsoft.Report.Dictionary.StiDataTableSource)">
+            <summary>
+            Root method for preparing reports data
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ChartViewModel">
+            <summary>
+            Chart view model
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ChartViewModel.#ctor(Medoc.DAL.Converters.IPatientConverter)">
+            <summary>
+            Creates new ChartViewModel
+            </summary>
+            <param name="viewAwareStatus">View aware status</param>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.TestResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ChartView">
+            <summary>
+            ChartView
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ShowStatisticHeader">
+            <summary>
+            Returns true if need to show statistic header, otherwise - false
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.StatisticView">
+            <summary>
+            ChartView
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.CondStatisticView">
+            <summary>
+            Statistic view for conditions test results
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ChartModel">
+            <summary>
+            Chart model
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.Patient">
+            <summary>
+            Patient
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.TestProgram">
+            <summary>
+            TestProgram
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.TestRunInfo">
+            <summary>
+            TestRunInfo
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.Probe">
+            <summary>
+            Probe
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.BodySiteInfoPreview">
+            <summary>
+            TestProgram
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.BodySiteInfo">
+            <summary>
+            BodySiteInfo
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.IsAlgometer">
+            <summary>
+            Gets or sets a value indicating whether this instance is for algometer.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ShowBottomStatistic">
+            <summary>
+            Gets or sets a value indicating whether show bottom statistic.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ShowTopStatistic">
+            <summary>
+            Gets or sets a value indicating whether show top statistic.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ChartViewModel.Register">
+            <summary>
+            Register in Mediator
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ChartViewModel.Unregister">
+            <summary>
+            Unregister in Mediator
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ChartViewModel.GetStatisticView(Medoc.ATS.TestResults)">
+            <summary>
+            Create StatisticView by chartModel
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ZoomPlusCommand">
+            <summary>
+            ZoomPlus Command
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ZoomMinusCommand">
+            <summary>
+            ZoomMinus Command
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ZoomDefaultCommand">
+            <summary>
+            ZoomDefault Command
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ChartViewModel.ZoomAutoCommand">
+            <summary>
+            ZoomAuto Command
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.LineChartViewModel">
+            <summary>
+            Line Chart view model
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.LineChartViewModel.#ctor(Cinch.IViewAwareStatus)">
+            <summary>
+            Creates new LineChartViewModel
+            </summary>
+            <param name="viewAwareStatus">View aware status</param>
+        </member>
+        <member name="M:AUI.Reports.Export.LineChartViewModel.#ctor">
+            <summary>
+            Creates new LineChartViewModel
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.LineChartViewModel.ChartModel">
+            <summary>
+            Chart model
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.TrialChartViewModel">
+            <summary>
+            Trial Chart view model
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.TrialChartViewModel.#ctor(Cinch.IViewAwareStatus)">
+            <summary>
+            Creates new TrialChartViewModel
+            </summary>
+            <param name="viewAwareStatus">View aware status</param>
+        </member>
+        <member name="M:AUI.Reports.Export.TrialChartViewModel.#ctor">
+            <summary>
+            Creates new TrialChartViewModel
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.TrialChartViewModel.ChartModel">
+            <summary>
+            Chart model
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.TrialChartViewModel.SelectionMode">
+            <summary>
+            SelectionMode
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ComparableTrial">
+            <summary>
+            Contains data for each trial
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ComparableTrial.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ComparableTrial.#ctor(System.Double,System.Double,System.String)">
+            
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="baselineTemp"></param>
+            <param name="destenationTemp"></param>
+            <param name="label"></param>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrial.BaselineTemp">
+            <summary>
+            The temperature which test starts from and go back to after each stimulus. ATS
+            20 � 45 [C], CHEPS 30 � 45 [C]
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrial.DestinationTemp">
+            <summary>
+            Get or set destination temperature, �C
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrial.Label">
+            <summary>
+            Get or set label of trial
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ComparableTrialsPair">
+            <summary>
+            Contains two <see cref="T:AUI.Reports.Export.ComparableTrial"/>
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ComparableTrialsPair.#ctor(AUI.Reports.Export.ComparableTrial,AUI.Reports.Export.ComparableTrial,System.String,Medoc.DeviceType,Medoc.ThermodeType)">
+            <summary>
+            Creates instance of this class
+            </summary>
+            <param name="firstTrial">first Trial</param>
+            <param name="secondTrial">second Trial</param>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrialsPair.ProbeType">
+            <summary>
+            Returns probe type
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrialsPair.Caption">
+            <summary>
+            Returns Caption
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrialsPair.Delta">
+            <summary>
+            Returns delta between <see cref="F:AUI.Reports.Export.ComparableTrialsPair.m_FirstTrial"/> and <see cref="F:AUI.Reports.Export.ComparableTrialsPair.m_SecondTrial"/>
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrialsPair.FirstTrial">
+            <summary>
+            Returns first trial
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrialsPair.SecondTrial">
+            <summary>
+            Returns second trial
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ComparableTrialsPair.GetMaxDestinationTemp">
+            <summary>
+            Get max temperature from pair ComparableTrial
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ComparableTrialsPair.GetMinDestinationTemp">
+            <summary>
+            Get min temperature from pair ComparableTrial
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrialsPair.YMax">
+            <summary>
+            Y axis max value
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ComparableTrialsPair.YMin">
+            <summary>
+            Y axis min value
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ComparableTrialsPair.GetBaselineTemp">
+            <summary>
+            Get baseline temperature for pair ComparableTrial
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:AUI.Reports.Export.ComparableTrialsPair.DeviceType" -->
+        <member name="T:AUI.Reports.Export.Controls.CtrlCompareTrials">
+            <summary>
+            This user control draw graph(Bars) of comparing result  
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.CtrlCompareTrials.#ctor">
+            <summary>
+            Default constructor 
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.CtrlCompareTrials.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AUI.Reports.Export.Controls.CtrlCompareTrials"/> class.
+            </summary>
+            <param name="conditioningStimulusTemp">Conditioning stimulus temperature</param>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.CtrlCompareTrials.ComparableTrialsPairList">
+            <summary>
+            Get and Set the list of results
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:AUI.Reports.Export.Controls.CtrlCompareTrials.GetPrintGraph(System.Collections.Generic.List{AUI.Reports.Export.ComparableTrialsPair},System.Int32,System.Int32)" -->
+        <member name="T:AUI.Reports.Export.Controls.RptATSImageDesignerCtrl">
+            <summary>
+            Designer for RptImgCommonCtrl
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptATSImageDesignerCtrl.#ctor(Stimulsoft.Report.Design.StiDesigner)">
+            <summary>
+            RptATSImageDesignerCtrl
+            </summary>
+            <param name="designer">This is report designer</param>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptATSImageDesignerCtrl.Design(Stimulsoft.Report.Components.StiComponent)">
+            <summary>
+            Show Design
+            </summary>
+            <param name="component">Describes the base class for all components</param>
+            <returns>pecifies identifiers to indicate the return value of a dialog box</returns>
+        </member>
+        <member name="T:AUI.Reports.Export.Controls.RptGroupBoxCtrl">
+            <summary>
+            Component like a winforms group box.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptGroupBoxCtrl.#ctor">
+            <summary>
+            Creates a new component of the type RptGroupBoxCtrl.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptGroupBoxCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD)">
+            <summary>
+            Creates a new component of the type RptGroupBoxCtrl.
+            </summary>
+            <param name="rect">The rectangle describes size and position of the component.</param>
+        </member>
+        <member name="E:AUI.Reports.Export.Controls.RptGroupBoxCtrl.GetValue">
+            <summary>
+            Raise when need Get value for expression;
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.ToolboxPosition">
+            <summary>
+            Gets value to sort a position in the toolbox.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.LocalizedName">
+            <summary>
+            Gets a localized component name.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptGroupBoxCtrl.RenderComponent(Stimulsoft.Report.Components.StiComponent@,Stimulsoft.Report.Components.StiContainer)">
+            <summary>
+            Rendering of the component without events.
+            </summary>
+            <param name="renderedComponent">Rendered component.</param>
+            <param name="outContainer">Panel in which rendering will be done.</param>
+            <returns>Is rendering finished or not.</returns>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Border">
+            <summary>
+            Gets or sets frame of the component.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Brush">
+            <summary>
+            Gets or sets a brush to fill a component.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Name">
+            <summary>
+            Gets or sets a name of a component.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:AUI.Reports.Export.Controls.RptGroupBoxCtrl.OnGetValue(Stimulsoft.Report.Events.StiGetValueEventArgs)" -->
+        <member name="M:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Paint(Stimulsoft.Report.Events.StiPaintEventArgs)">
+            <summary>
+            Paints a component.
+            </summary>
+            <param name="e">Argument for painting.</param>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Editable">
+            <summary>
+            Editable.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.LinesOfUnderlining">
+            <summary>
+            Lines of underlining.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.ProcessAtEnd">
+            <summary>
+            Process at end.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.LinesOfUnderline">
+            <summary>
+            Gets or sets value indicates that it is necessary to lines of underline. 
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.TextValue">
+            <summary>
+            Gets or sets text value. If the text is not null thet it is necessary to use this text.  
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.MaxNumberOfLines">
+            <summary>
+            Gets or sets maximum number of lines which specify the limit of the height stretch.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.ProcessingDuplicates">
+            <summary>
+            Processing of duplicates.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.OnlyText">
+            <summary>
+            Gets or sets value indicates that the text expression contains a text only.  
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptGroupBoxCtrl.SetText(Stimulsoft.Report.Components.StiGetValue)">
+            <summary>
+            Sets the text value in all printed objects.
+            </summary>
+            <param name="getValue">Value for setting.</param>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.HideZeros">
+            <summary>
+            Gets or sets value indicates that no need show zeroes
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Text">
+            <summary>
+            Gets or sets text expression.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.TextBrush">
+            <summary>
+            Gets or sets a brush to draw text.  
+            </summary>
+            <summary>
+            Gets or sets a brush to fill a component.
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupBoxCtrl.Font">
+            <summary>
+            Gets or sets font of component..
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.Controls.RptGroupContainerCtrl">
+            <summary>
+            Group Container
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptGroupContainerCtrl.#ctor">
+            <summary>
+            Group Container 
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptGroupContainerCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD)">
+            <summary>
+            Group Container 
+            </summary>
+            <param name="rect">RectangleD</param>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupContainerCtrl.Caption">
+            <summary>
+            Text on grpoup box lable
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupContainerCtrl.CreateDefShape">
+            <summary>
+            Text on grpoup box lable
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptGroupContainerCtrl.LocalizedName">
+            <summary>
+            Gets a localized component name.
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.Controls.RptImgBodySiteCtrl">
+            <summary>
+            Show BodySite Image on the report
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgBodySiteCtrl.#ctor">
+            <summary>
+            RptImgBodySiteCtrl
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgBodySiteCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD)">
+            <summary>
+            RptImgGraphResultCtrl
+            </summary>
+            <param name="rect">RectangleD</param>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptImgBodySiteCtrl.LocalizedName">
+            <summary>
+            Gets a localized component name.
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.Controls.RptImgCommonCtrl">
+            <summary>
+            Common StiImage for report
+            </summary>	
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgCommonCtrl.#ctor">
+            <summary>
+            RptImgCommonCtrl
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgCommonCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD)">
+            <summary>
+            RptImgCommonCtrl
+            </summary>
+            <param name="rect">Stores a set of four double-point numbers that represent the location and size of a rectangle</param>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgCommonCtrl.GetImage">
+            <summary>
+            Get Image
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.Controls.RptImgGraphResultCtrl">
+            <summary>
+            This Control show GraphResult in the Reports
+            </summary>
+            
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgGraphResultCtrl.#ctor">
+            <summary>
+            RptImgGraphResultCtrl
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgGraphResultCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD)">
+            <summary>
+            RptImgGraphResultCtrl
+            </summary>
+            <param name="rect">RectangleD</param>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptImgGraphResultCtrl.LocalizedName">
+            <summary>
+            Gets a localized component name.
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.Controls.RptImgLogoCtrl">
+            <summary>
+            This Ctrl used for show user logo in the reports
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgLogoCtrl.#ctor">
+            <summary>
+            RptImgLogoCtrl
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgLogoCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD)">
+            <summary>
+            RptImgLogoCtrl
+            </summary>
+            <param name="rect">Stores a set of four double-point numbers that represent the location and size of a rectangle</param>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptImgLogoCtrl.LocalizedName">
+            <summary>
+            Gets a localized component name.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptImgLogoCtrl.GetImage">
+            <summary>
+            Get Image
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.Controls.RptResultCommentCtrl">
+            <summary>
+            This class show comment why link test
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptResultCommentCtrl.#ctor">
+            <summary>
+            RptResultCommentCtrl
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptResultCommentCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD)">
+            <summary>
+            RptResultCommentCtrl
+            </summary>
+            <param name="rect">Stores a set of four double-point numbers that represent the location and size of a rectangle</param>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptResultCommentCtrl.#ctor(Stimulsoft.Base.Drawing.RectangleD,System.String)">
+            <summary>
+            RptResultCommentCtrl
+            </summary>
+            <param name="rect">Stores a set of four double-point numbers that represent the location and size of a rectangle</param>
+            <param name="text"></param>
+        </member>
+        <member name="P:AUI.Reports.Export.Controls.RptResultCommentCtrl.LocalizedName">
+            <summary>
+            Gets a localized component name.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Controls.RptResultCommentCtrl.LoadComment">
+            <summary>
+            Load comment from DN into Edit
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ImageHelper">
+            <summary>
+            Class Helper for creating image from Visual component
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ImageHelper.Generate(Pathway.WPF.Models.ChartModel,System.Int32,System.Int32)">
+            <summary>
+            Generate image based on ChartModel
+            </summary>
+            <param name="chartModel">source model</param>
+            <param name="width">width of result image</param>
+            <param name="height">height of result image</param>
+        </member>
+        <member name="M:AUI.Reports.Export.ImageHelper.GetStatistic(Pathway.WPF.Models.ChartModel)">
+            <summary>
+            Generate statistic image based on ChartModel
+            </summary>
+            <param name="chartModel">source model</param>
+            <param name="width">width of result image</param>
+            <param name="height">height of result image</param>
+        </member>
+        <member name="M:AUI.Reports.Export.ImageHelper.Generate(Pathway.WPF.Models.CompareTrialsModel,System.Int32,System.Int32)">
+            <summary>
+            Generate image based on CompareTrialsModel
+            </summary>
+            <param name="chartModel">source model</param>
+            <param name="width">width of result image</param>
+            <param name="height">height of result image</param>
+        </member>
+        <member name="M:AUI.Reports.Export.ImageHelper.Generate(Pathway.WPF.Models.SignalsChartModel,System.Int32,System.Int32)">
+            <summary>
+            Generate image based on SignalsChartModel
+            </summary>
+            <param name="chartModel">source model</param>
+            <param name="width">width of result image</param>
+            <param name="height">height of result image</param>
+        </member>
+        <member name="M:AUI.Reports.Export.ImageHelper.Generate(Pathway.WPF.Models.AlgometerPrePostModel,System.Int32,System.Int32)">
+            <summary>
+            Generate image based on AlgometerPrePostModel
+            </summary>
+            <param name="chartModel">source model</param>
+            <param name="width">width of result image</param>
+            <param name="height">height of result image</param>
+        </member>
+        <member name="T:AUI.Reports.Export.IMediatorSupport">
+            <summary>
+            IMediatorSupport
+            </summary>
+        </member>
+        <member name="T:AUI.Reports.Export.ReportHelper">
+            <summary>
+            This class contains some helper methods for reports.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ReportHelper.CalculateChart(System.Nullable{System.Double},System.Nullable{System.Double},System.Double)">
+            <summary>
+            Calculates the avg chart and returns Image
+            </summary>
+            <param name="upperLimit"></param>
+            <param name="lowerLimit"></param>
+            <param name="currentAVG"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AUI.Reports.Export.Utils">
+            <summary>
+            All the general functions are in this class.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.SetUniqueProgramName(Medoc.ATS.TestProgram,System.Boolean)">
+            <summary>
+            SetUniqueProgramName
+            </summary>
+            <param name="program"></param>
+            <param name="showMessage"></param>
+            <param name="messageBoxService"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.ToVisibility(System.Boolean)">
+            <summary>
+            Converts bool to Visibility
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.GetPineRatingForEligibilityCriteria(Medoc.ATS.RampAndHoldTestResult)">
+            <summary>
+            Returns data for RHEligibilityCriteria report template
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.IsValidFileName(System.String)">
+            <summary>
+            Returns true if name contains valid file name, otherwise - false
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.GetParamValue(Medoc.TCU.TempStatsBin,AUI.Reports.Export.Utils.ThermodeStatisticParam,System.Int32)">
+            <summary>
+            Returns statistic parameter by it name and index
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.GetParamListSize(AUI.Reports.Export.Utils.ThermodeStatisticParam)">
+            <summary>
+            Return list size for related parameter
+            </summary>        
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.GetParamMeasDesc(AUI.Reports.Export.Utils.ThermodeStatisticParam)">
+            <summary>
+            Return descriprion for first column 
+            </summary>        
+        </member>
+        <member name="M:AUI.Reports.Export.Utils.GetParamDesc(AUI.Reports.Export.Utils.ThermodeStatisticParam)">
+            <summary>
+            Return parameter description
+            </summary>        
+        </member>
+        <member name="T:AUI.Reports.Export.ViewModelEx">
+            <summary>
+            Base ViewModel class with extended destructor
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ViewModelEx.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ViewModelEx.Distroy(Cinch.WorkspaceData)">
+            <summary>
+            Distroys the specified workspace.
+            </summary>
+            <param name="workspace">The workspace.</param>
+        </member>
+        <member name="M:AUI.Reports.Export.ViewModelEx.GetInitialDirForSaveDialog">
+            <summary>
+            Returns inirial directory for the save file dialog.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ViewModelEx.StopLoadingData">
+            <summary>
+            Stops thread of loading data.
+            </summary>
+        </member>
+        <member name="M:AUI.Reports.Export.ViewModelEx.RefreshUI">
+            <summary>
+            Updates UI
+            </summary>
+        </member>
+        <member name="P:AUI.Reports.Export.ViewModelEx.ViewIsVisible">
+            <summary>
+            Gets a value indicating whether View is visible
+            </summary>
+            <value>
+              <c>true</c> if view is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AUI.Reports.Export.ViewModelEx.CurrentDeviceType">
+            <summary>
+            Gets the type of the current device.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,11 +1,13 @@
-﻿using NLog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+
+using NLog;
 
 namespace ColorChat.WPF.EventLogger
 {
@@ -15,6 +17,8 @@ namespace ColorChat.WPF.EventLogger
         private static Logger logger1 = LogManager.GetLogger("file1");
         private int _countProperties;
         private Point? _lastMouseClickPoint;
+        private int? _timestamp;
+        private FrameworkElement CurrentFocus;
         /// <summary>
         /// key is number of order
         /// </summary>
@@ -23,27 +27,35 @@ namespace ColorChat.WPF.EventLogger
         public EventLoggerClass()
         {
             _countProperties = 0;
-            
+            logger.Info("Start EventLoggerClass");
+            logger1.Info("Start EventLoggerClass");
+            //EventManager.RegisterClassHandler(
+            //    typeof(Control),
+            //    UIElement.MouseDownEvent,
+            //    new MouseButtonEventHandler(MouseDown),
+            //    true
+            //);
+
             EventManager.RegisterClassHandler(
                 typeof(Control),
-                UIElement.MouseDownEvent,
-                new MouseButtonEventHandler(MouseDown),
+                UIElement.KeyDownEvent,
+                new KeyEventHandler(KeyDown),
                 true
             );
 
-            //EventManager.RegisterClassHandler(
-            //    typeof(Control),
-            //    UIElement.PreviewKeyDownEvent,
-            //    new KeyEventHandler(KeyDown),
-            //    true
-            //);
+            EventManager.RegisterClassHandler(
+                typeof(Control),
+                Keyboard.GotKeyboardFocusEvent,
+                new KeyboardFocusChangedEventHandler(OnKeyboardFocusChanged),
+                true
+            );
 
-            //EventManager.RegisterClassHandler(
-            //    typeof(Control),
-            //    Keyboard.GotKeyboardFocusEvent,
-            //    new KeyboardFocusChangedEventHandler(OnKeyboardFocusChanged),
-            //    true
-            //);
+            EventManager.RegisterClassHandler(
+                typeof(UIElement),
+                UIElement.PreviewTextInputEvent,
+                new TextCompositionEventHandler(TextInput),
+                true
+            );
         }
 
         /// <summary>
@@ -52,9 +64,7 @@ namespace ColorChat.WPF.EventLogger
         /// <param name="source"></param>
         private int CollectCommonProperties(TypeAction @type, FrameworkElement source)
         {
-            _properties.Add(++_countProperties, new LogItem { Action = @type.ToString(), Value = source.DependencyObjectType.Name});
-            //_properties["Name"] = source.Name;
-            //_properties["ClassName"] = source.GetType().ToString();
+            _properties.Add(++_countProperties, new LogItem { Action = $"A:{@type.ToString()}", Value = $"V: {source.DependencyObjectType.Name}"});
             return _countProperties;
         }
 
@@ -71,7 +81,6 @@ namespace ColorChat.WPF.EventLogger
             else {
                 if (pt.X == _lastMouseClickPoint.Value.X && pt.Y == _lastMouseClickPoint.Value.Y)
                 {
-
                     return;
                 }
             }
@@ -82,15 +91,11 @@ namespace ColorChat.WPF.EventLogger
             {
                 // Perform action on hit visual object.
             }
-
-            
             int key = CollectCommonProperties(TypeAction.MousePress, e.OriginalSource as FrameworkElement);
             LogMouse(key, _properties, e, isUp: false);
         }
 
-        void LogMouse(int key, IDictionary<int, LogItem> properties,
-              MouseButtonEventArgs e,
-              bool isUp)
+        void LogMouse(int key, IDictionary<int, LogItem> properties, MouseButtonEventArgs e, bool isUp)
         {
             if (!properties.TryGetValue(key, out var logItem)){
                 throw new Exception("Invalid key");
@@ -131,25 +136,30 @@ namespace ColorChat.WPF.EventLogger
             FrameworkElement source = sender as FrameworkElement;
             if (source == null)
                 return;
-
-            CollectCommonProperties(TypeAction.KeyboardPress, source);
-            LogKeyboard(_properties, e.Key,
-                        isUp: false);
+            if (!source.Focusable || source.GetType().Name == "MainWindow" || source.GetType().Name == "ScrollViewer")
+                return;
+            LogKeyboard(_properties, e, source, isUp: false);
         }
 
-        void LogKeyboard(IDictionary<int, LogItem> properties,
-                 Key key,
-                 bool isUp)
+        void LogKeyboard(IDictionary<int, LogItem> properties, KeyEventArgs e, FrameworkElement source, bool isUp)
         {
-            _properties.Add(++_countProperties, new LogItem {Action = GetKeyValue(key).ToString() });
-            //properties["key"] = GetKeyValue(key).ToString();
-            //properties["action"] = isUp ? "up" : "down";
+            var action = $"A:KP: {source.GetType().Name}";
+            var value = $"V: {e.Key}";
+            var Description = $"D: Modifier: {Keyboard.Modifiers} SystemKey: {e.SystemKey.ToString()}";
+            var kv = GetKeyValue(e.Key).ToString();
+            var item = new LogItem { Action = action, Value = kv, 
+                Description = (Keyboard.Modifiers != ModifierKeys.None || e.SystemKey != Key.None)? Description: string.Empty };
+            _properties.Add(++_countProperties, item);
+        }
 
-            //Breadcrumb item = new Breadcrumb();
-            //item.Event = isUp ? BreadcrumbEvent.KeyUp : BreadcrumbEvent.KeyDown;
-            //item.CustomData = properties;
-
-            //AddBreadcrumb(item);
+        bool CheckPasswordElement(UIElement targetElement)
+        {
+            if (targetElement != null)
+            {
+                AutomationPeer automationPeer = UIElementAutomationPeer.CreatePeerForElement(targetElement);
+                return (automationPeer != null) ? automationPeer.IsPassword() : false;
+            }
+            return false;
         }
 
         Key GetKeyValue(Key key)
@@ -173,7 +183,7 @@ namespace ColorChat.WPF.EventLogger
                     return key;
 
                 default:
-                    return Key.Multiply;
+                    return key;
             }
         }
 
@@ -183,8 +193,8 @@ namespace ColorChat.WPF.EventLogger
             {
                 var i = item.Key;
                 var v = item.Value;
-                logger.Info($"logger: #{i} : Action: {v.Action} Value: {v.Value} Desciption: {v.Description}");
-                //logger1.Info($"logger1: #{i} : Action: {v.Action} Value: {v.Value} Desciption: {v.Description}");
+                logger.Info($"logger: #{i} {v.Action} {v.Value} {v.Description}");
+                logger1.Info($"logger1: #{i} {v.Action} {v.Value} {v.Description}");
             }
         }
 
@@ -193,23 +203,19 @@ namespace ColorChat.WPF.EventLogger
             FrameworkElement source = sender as FrameworkElement;
             if (source == null)
                 return;
-
-            CollectCommonProperties(TypeAction.TextInput, source);
+            CheckPasswordElement(source);
             LogTextInput(_properties, e);
         }
 
-        void LogTextInput(IDictionary<int, LogItem> properties,
-                          TextCompositionEventArgs e)
+        void LogTextInput(IDictionary<int, LogItem> properties, TextCompositionEventArgs e)
         {
-            _properties.Add(++_countProperties, new LogItem { Action = "Press button", Value = e.Text });
-            //properties["text"] = e.Text;
-            //properties["action"] = "press";
-
-            //Breadcrumb item = new Breadcrumb();
-            //item.Event = BreadcrumbEvent.KeyPress;
-            //item.CustomData = properties;
-
-            //AddBreadcrumb(item);
+            var element = e.OriginalSource as UIElement;
+            var el = element.GetType().Name;
+            if (!_timestamp.HasValue || _timestamp.Value != e.Timestamp)
+            {
+                _timestamp = e.Timestamp;
+                _properties.Add(++_countProperties, new LogItem { Action = $"A:TI {el} TimeStamp {e.Timestamp}", Value = $"V: {e.Text}" });
+            }
         }
 
         void OnKeyboardFocusChanged(object sender, KeyboardFocusChangedEventArgs e)
@@ -217,29 +223,21 @@ namespace ColorChat.WPF.EventLogger
             FrameworkElement oldFocus = e.OldFocus as FrameworkElement;
             if (oldFocus != null)
             {
-               
-                LogFocus(isGotFocus: false, e);
+                //LogFocus(isGotFocus: false, e);
             }
 
             FrameworkElement newFocus = e.NewFocus as FrameworkElement;
             if (newFocus != null)
             {
-               
-                LogFocus(isGotFocus: true, e);
+                CurrentFocus = sender as FrameworkElement;
+                //LogFocus(isGotFocus: true, e);
             }
         }
 
         void LogFocus(bool isGotFocus, KeyboardFocusChangedEventArgs e)
         {
-            _properties.Add(++_countProperties, new LogItem { Action = isGotFocus == false ? "LostFocus" : "GotFocus", Value = e.OriginalSource.ToString() });
-            //Breadcrumb item = new Breadcrumb();
-            //item.Event = isGotFocus ? BreadcrumbEvent.GotFocus :
-            //                          BreadcrumbEvent.LostFocus;
-            //item.CustomData = properties;
-
-            //AddBreadcrumb(item);
+            _properties.Add(++_countProperties, new LogItem { Action = $"A:{(isGotFocus == false ? "LostFocus" : "GotFocus")}", Value = $"V: {e.OriginalSource.ToString()}" });
         }
-
 
         private string GetDescription(MouseButtonEventArgs e)
         {

@@ -10,9 +10,6 @@ namespace PrototypeLogs.Export
 {
     public class ExceptionStrategy : BaseStrategy, IExportExcelStrategy
     {
-        private string _logFileName;
-        private string _excelFileName;
-        private uint _strategyIndex;
         private uint rowIdx = 0;
         private Dictionary<int, string> _sheetHeader
         {
@@ -38,17 +35,17 @@ namespace PrototypeLogs.Export
         public void DoWork()
         {
             rowIdx = 2;
-            var strings = ReadFile(_logFileName);
+            var strings = ReadFile(new LogFileTextReader(_logFileName));
             var sheetName = GetSheetName();
-            var excel = new OpenXML(_excelFileName, sheetName, _strategyIndex);
+            var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex);
             excel.SetColumnWidth(1, 10, 200);
             excel.AddHeader(_sheetHeader);
-            //excel.SetCurrentSheetByName(sheetName);
+            
             foreach (var s in strings)
             {
                 rowIdx++;
                 Row row = excel.SheetData.AppendChild(new Row() { RowIndex = rowIdx });
-                excel.InsertCell(row, s, CellValues.String, ExcelConstant.BOLDINDEXSTYLE);
+                excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
             }
             excel.Close();
         }

@@ -70,8 +70,9 @@
     <Reference Include="NLog.Extensions.Logging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.Extensions.Logging.5.0.1\lib\net461\NLog.Extensions.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Pathway.WPF.ImportExport">
-      <HintPath>..\..\medoc_pathway\Pathway.WPF\bin\Debug\Pathway.WPF.ImportExport.dll</HintPath>
+    <Reference Include="Pathway.WPF.ImportExport, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BINS\Pathway.WPF.ImportExport.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -102,14 +103,16 @@
     <Compile Include="EventLogger\LogItem.cs" />
     <Compile Include="EventLogger\TypeAction.cs" />
     <Compile Include="Export\BaseStrategy.cs" />
-    <Compile Include="Export\ExcelConst.cs" />
+    <Compile Include="Export\ExcelConstants.cs" />
     <Compile Include="Export\ExceptionStrategy3.cs" />
-    <Compile Include="Export\ExceptionStrategy2.cs" />
+    <Compile Include="Export\EventStrategy.cs" />
     <Compile Include="Export\ExceptionStrategy.cs" />
     <Compile Include="Export\IExportExcelStrategy.cs" />
+    <Compile Include="Export\ILogFileReader.cs" />
+    <Compile Include="Export\LogFileTextReader.cs" />
     <Compile Include="Export\LogsExcelBuilderOpenXML.cs" />
     <Compile Include="Export\LogsExporter.cs" />
-    <Compile Include="Export\OpenXML.cs" />
+    <Compile Include="Export\LogsOpenXML.cs" />
     <Compile Include="Export\StrategyFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

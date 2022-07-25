@@ -16,7 +16,7 @@ namespace ColorChat.WPF.Export
         private static string fileLog = "short.log";
         private static string pidLog = "pid.log";
         private static string eventLog = "event.log";
-        private static string excelFile = "Excel.xlsx";
+        private static string excelFile = $"Excel-{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx";
 
         private static Logger logger = LogManager.GetLogger("file");
         private static Logger logger1 = LogManager.GetLogger("file1");
@@ -113,7 +113,6 @@ namespace ColorChat.WPF.Export
             }
             if (_builder == null)
             {
-                //LogsExcelBuilderOpenXML.CreateSpreadsheetWorkbook(m_fileName);
                 _builder = new LogsExcelBuilderOpenXML(this.m_fileName, m_logList);
                 _builder.DoWorkWithFile(m_logList[0]);
                 logger1.Info($"_builder is created.");

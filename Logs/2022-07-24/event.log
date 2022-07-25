@@ -1,0 +1,26 @@
+20.07.2022 10:14:11:416 7.0.0.16 [1] (INFO): Initializing TCU proxy on port: Simulator for device: TCU. 
+
+20.07.2022 10:14:11:621 7.0.0.16 [1] (WARN): TCU device has connected to Simulator port. 
+
+20.07.2022 10:14:11:621 7.0.0.16 [19] (WARN): Send Command:GetActiveThermode Token:2 
+ Response: Not received. 
+
+20.07.2022 10:14:11:659 7.0.0.16 [19] (WARN): Send Command:GetThermodeState Token:5  Thermode:TSA
+ Response: Not received. 
+
+20.07.2022 10:14:11:659 7.0.0.16 [19] (WARN): Send Command:GetThermodeState Token:6  Thermode:CHEPS
+ Response: Not received. 
+
+20.07.2022 10:14:11:672 7.0.0.16 [19] (WARN): Send Command:GetThermodeState Token:7  Thermode:CHEPS
+ Response: Not received. 
+
+20.07.2022 10:14:13:203 7.0.0.16 [19] (WARN): Send Command:GetThermodeState Token:38  Thermode:CHEPS
+ Response: Not received. 
+
+20.07.2022 10:14:14:145 7.0.0.16 [19] (WARN): Send Command:SetTcuState Token:57  CommandState:RestMode
+ Response: Not received. 
+
+20.07.2022 10:14:17:146 7.0.0.16 [1] (INFO): START. 
+
+20.07.2022 10:14:20:973 7.0.0.16 [1] (INFO): FINISH. 
+

@@ -2,22 +2,15 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Export\LogsExcelBuilderOpenXML.cs" />
-    <Compile Remove="Export\LogsExporter.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove="fakveazn.yza~" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CarlosAgExcelXmlWriterLibrary" Version="1.0.0" />
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.5" />
     <PackageReference Include="NLog" Version="5.0.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.0.1" />
@@ -31,10 +24,6 @@
     <None Update="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Export\" />
   </ItemGroup>
 
 </Project>
