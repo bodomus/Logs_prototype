@@ -13,8 +13,7 @@ namespace ColorChat.WPF
 {
     public partial class App : Application
     {
-        private static Logger logger = LogManager.GetLogger("file");
-        private static Logger logger1 = LogManager.GetLogger("file1");
+        private static Logger logger1 = LogManager.GetLogger("eventFile");
         private EventLoggerClass EL = new EventLoggerClass();
         protected override void OnExit(ExitEventArgs e)
         {
@@ -23,12 +22,8 @@ namespace ColorChat.WPF
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            logger.Info("Info");
-            logger.Info("Note \n A: - Action\n V: - Value\n D: Desciption\n KP: KeyPress\n TI: Text input\n ");
-            //var logsFiles = LogsExporter.GetLogs();
-            //var excelFile = LogsExporter.GetExcelFileName();
-            //var logExport = new LogsExporter(logsFiles, excelFile);
-            
+            logger1.Info("Note \n A: \tAction\n V: \tValue\n D: \tDesciption\n KP: \tKeyPress\n TI: \tText input\n MP: \tMouse press\n ");
+           
             HubConnection connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:5000/colorchat")
                 .Build();

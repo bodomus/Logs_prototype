@@ -18,8 +18,6 @@ namespace ColorChat.WPF.EventLogger
         /// description
         /// </summary>
         public string Description { get; set; }
-
-        //public TimeSpan EventOccured => 
-        
+       
     }
 }

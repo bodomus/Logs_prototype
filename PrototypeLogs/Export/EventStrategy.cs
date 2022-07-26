@@ -17,10 +17,10 @@ namespace PrototypeLogs.Export
             get
             {
                 return new Dictionary<int, string>() {
-                    {1, "Name"},
-                    {2, "Name 2"},
-                    {3, "Name 3"},
-                    {4, "Name 4"}
+                    {1, "Date&Time"},
+                    {2, "Action"},
+                    {3, "Value"},
+                    {4, "Description"}
                     };
             }
         }

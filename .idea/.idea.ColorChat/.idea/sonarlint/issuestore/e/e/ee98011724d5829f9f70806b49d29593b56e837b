@@ -1,0 +1,29 @@
+
+Mcsharpsquid:S1125ê"*Remove the unnecessary Boolean literal(s).(ŒÌÊÆşÿÿÿÿ
+@csharpsquid:S2933"Make '_properties' 'readonly'.(ƒì…Æşÿÿÿÿ
+Ocsharpsquid:S1172Œ"1Remove this unused method parameter 'properties'.(‚Ãç’
+Ncsharpsquid:S1172"+Remove this unused method parameter 'isUp'.(±µƒ¯ÿÿÿÿÿ
+Ocsharpsquid:S1172É"1Remove this unused method parameter 'properties'.(³”
+Vcsharpsquid:S112`"5'System.Exception' should not be thrown by user code.(‘ì»ûÿÿÿÿÿ
+Lcsharpsquid:S1144"*Remove the unused private field 'logger1'.(›©«íüÿÿÿÿ
+Icsharpsquid:S1144"+Remove the unused private method 'KeyDown'.(ÎÓÆÒ
+Pcsharpsquid:S1144¿"-Remove the unused private method 'TextInput'.(ş•Ü‡ıÿÿÿÿ
+Xcsharpsquid:S1144×":Remove the unused private method 'OnKeyboardFocusChanged'.(±Õ®½
+Ucsharpsquid:S1144ô"2Remove the unused private method 'GetDescription'.(Û‰ïÁûÿÿÿÿ
+Gcsharpsquid:S1481@"+Remove the unused local variable 'source1'.(åñá
+@csharpsquid:S125'"Remove this commented out code.(¼è÷ïøÿÿÿÿ
+;csharpsquid:S1258"Remove this commented out code.(µİ¸à
+@csharpsquid:S125P"Remove this commented out code.(×ñïğşÿÿÿÿ
+@csharpsquid:S125c"Remove this commented out code.(çãÉ…ıÿÿÿÿ
+;csharpsquid:S125j"Remove this commented out code.(Ä¢À
+@csharpsquid:S125l"Remove this commented out code.(’Ğ÷Üıÿÿÿÿ
+@csharpsquid:S125p"Remove this commented out code.(¸Á“Ÿøÿÿÿÿ
+@csharpsquid:S125r"Remove this commented out code.(ÁÁÜîøÿÿÿÿ
+;csharpsquid:S125v"Remove this commented out code.(ğÒóÜ
+;csharpsquid:S125x"Remove this commented out code.(ğõã˜
+;csharpsquid:S125{"Remove this commented out code.(ĞÎú€
+Acsharpsquid:S125‘"Remove this commented out code.(ƒ€Ëˆşÿÿÿÿ
+<csharpsquid:S125»"Remove this commented out code.(ù÷‘ô
+<csharpsquid:S125Í"Remove this commented out code.(‹Œáú
+<csharpsquid:S125ë"Remove this commented out code.(²³œµ
+Acsharpsquid:S125ú"Remove this commented out code.(ª½‘Ëøÿÿÿÿ

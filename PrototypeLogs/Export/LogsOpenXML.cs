@@ -31,7 +31,7 @@ namespace PrototypeLogs.Export
             if (String.IsNullOrEmpty(fileName))
                 throw new ArgumentException("fileName");
             _fileName = fileName;
-            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet(sheetName, sheetIndex);
+            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet(sheetName, sheetIndex, 200);
             Sheet = dataSheets.Key;
             SheetData = dataSheets.Value;
         }
@@ -41,7 +41,7 @@ namespace PrototypeLogs.Export
             if (String.IsNullOrEmpty(fileName))
                 throw new ArgumentException("fileName");
 
-            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet(sheetName, sheetIndex);
+            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet(sheetName, sheetIndex, 200);
             Sheet = dataSheets.Key;
             SheetData = dataSheets.Value;
             _fileName = fileName;

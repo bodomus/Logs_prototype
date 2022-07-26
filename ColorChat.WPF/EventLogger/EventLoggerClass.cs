@@ -11,14 +11,16 @@ using NLog;
 
 namespace ColorChat.WPF.EventLogger
 {
-    public class EventLoggerClass: IEventLoggerClass
+    public class EventLoggerClass : IEventLoggerClass
     {
-        private static Logger logger = LogManager.GetLogger("file");
-        private static Logger logger1 = LogManager.GetLogger("file1");
+        private const int MAX_LOG_BOUND = 10;
+
+        private static Logger eventFile = LogManager.GetLogger("eventFile");
         private int _countProperties;
-        private Point? _lastMouseClickPoint;
         private int? _timestamp;
+        private Point? _lastMouseClickPoint;
         private FrameworkElement CurrentFocus;
+
         /// <summary>
         /// key is number of order
         /// </summary>
@@ -27,26 +29,18 @@ namespace ColorChat.WPF.EventLogger
         public EventLoggerClass()
         {
             _countProperties = 0;
-            logger.Info("Start EventLoggerClass");
-            logger1.Info("Start EventLoggerClass");
-            //EventManager.RegisterClassHandler(
-            //    typeof(Control),
-            //    UIElement.MouseDownEvent,
-            //    new MouseButtonEventHandler(MouseDown),
-            //    true
-            //);
-
+            eventFile.Info("Start collect events...");
             EventManager.RegisterClassHandler(
                 typeof(Control),
-                UIElement.KeyDownEvent,
-                new KeyEventHandler(KeyDown),
+                UIElement.MouseDownEvent,
+                new MouseButtonEventHandler(MouseDown),
                 true
             );
 
             EventManager.RegisterClassHandler(
                 typeof(Control),
-                Keyboard.GotKeyboardFocusEvent,
-                new KeyboardFocusChangedEventHandler(OnKeyboardFocusChanged),
+                UIElement.KeyDownEvent,
+                new KeyEventHandler(KeyDown),
                 true
             );
 
@@ -58,77 +52,71 @@ namespace ColorChat.WPF.EventLogger
             );
         }
 
+        private void ClearProperties()
+        {
+            _properties?.Clear();
+            _countProperties = 0;
+        }
+
+        private void AddLogItem(LogItem item, bool disableAutoReset)
+        {
+            _properties.Add(++_countProperties, item);
+            if (_countProperties > MAX_LOG_BOUND && !disableAutoReset)
+            {
+                Print();
+                ClearProperties();
+            }
+        }
+
         /// <summary>
         /// Action
         /// </summary>
         /// <param name="source"></param>
-        private int CollectCommonProperties(TypeAction @type, FrameworkElement source)
+        private int CollectCommonProperties(TypeAction @type, FrameworkElement source, bool disableAutoReset)
         {
-            _properties.Add(++_countProperties, new LogItem { Action = $"A:{@type.ToString()}", Value = $"V: {source.DependencyObjectType.Name}"});
+            AddLogItem(new LogItem { Action = $"A:{@type.ToString()}", Value = $"V: {source.DependencyObjectType.Name}" }, disableAutoReset);
             return _countProperties;
         }
 
         void MouseDown(object sender, MouseButtonEventArgs e)
         {
             FrameworkElement source = sender as FrameworkElement;
-            Control source1 = sender as Control;
             if (source == null)
                 return;
 
             Point pt = e.GetPosition((UIElement)e.OriginalSource);
             if (!_lastMouseClickPoint.HasValue || !(pt.X == _lastMouseClickPoint.Value.X && pt.Y == _lastMouseClickPoint.Value.Y))
-                _lastMouseClickPoint = new Point {X=pt.X, Y= pt.Y };
-            else {
+                _lastMouseClickPoint = new Point { X = pt.X, Y = pt.Y };
+            else
+            {
                 if (pt.X == _lastMouseClickPoint.Value.X && pt.Y == _lastMouseClickPoint.Value.Y)
-                {
                     return;
-                }
             }
             // Perform the hit test against a given portion of the visual object tree.
             HitTestResult result = VisualTreeHelper.HitTest(source, pt);
-            //var b = result.VisualHit.GetValue();
-            if (result != null)
-            {
-                // Perform action on hit visual object.
-            }
-            int key = CollectCommonProperties(TypeAction.MousePress, e.OriginalSource as FrameworkElement);
-            LogMouse(key, _properties, e, isUp: false);
+            int key = CollectCommonProperties(TypeAction.MousePress, e.OriginalSource as FrameworkElement, true);
+            LogMouse(key, e, isUp: false);
         }
 
-        void LogMouse(int key, IDictionary<int, LogItem> properties, MouseButtonEventArgs e, bool isUp)
+        void LogMouse(int key, MouseButtonEventArgs e, bool isUp)
         {
-            if (!properties.TryGetValue(key, out var logItem)){
-                throw new Exception("Invalid key");
+            if (!_properties.TryGetValue(key, out var logItem))
+            {
+                throw new ArgumentException($"Log mouse: invalid key: {key} in log dictionary.");
             }
 
-            //logItem.Value = e.ChangedButton.ToString();
-            //logItem.Description = e.ClickCount.ToString();
-            //properties["mouseButton"] = e.ChangedButton.ToString();
-            //properties["ClickCount"] = e.ClickCount.ToString();
-            //Breadcrumb item = new Breadcrumb();
             if (e.ClickCount == 2)
             {
-                //properties["action"] = "doubleClick";
                 logItem.Description = "doubleClick";
-                //item.Event = BreadcrumbEvent.MouseDoubleClick;
             }
             else if (isUp)
             {
-                //properties["action"] = "up";
                 logItem.Description = "up";
-                //item.Event = BreadcrumbEvent.MouseUp;
             }
             else
             {
-                //properties["action"] = "down";
                 logItem.Description = "Down";
-                //item.Event = BreadcrumbEvent.MouseDown;
             }
-
-            //_properties.Add(++_countProperties, logItem);
-            //item.CustomData = properties;
-
-            //AddBreadcrumb(item);
         }
 
         void KeyDown(object sender, KeyEventArgs e)
@@ -138,18 +126,21 @@ namespace ColorChat.WPF.EventLogger
                 return;
             if (!source.Focusable || source.GetType().Name == "MainWindow" || source.GetType().Name == "ScrollViewer")
                 return;
-            LogKeyboard(_properties, e, source, isUp: false);
+            LogKeyboard(e, source, isUp: false);
         }
 
-        void LogKeyboard(IDictionary<int, LogItem> properties, KeyEventArgs e, FrameworkElement source, bool isUp)
+        void LogKeyboard(KeyEventArgs e, FrameworkElement source, bool isUp)
         {
             var action = $"A:KP: {source.GetType().Name}";
-            var value = $"V: {e.Key}";
+            var kv = $"V: {GetKeyValue(e.Key).ToString()}";
             var Description = $"D: Modifier: {Keyboard.Modifiers} SystemKey: {e.SystemKey.ToString()}";
-            var kv = GetKeyValue(e.Key).ToString();
-            var item = new LogItem { Action = action, Value = kv, 
-                Description = (Keyboard.Modifiers != ModifierKeys.None || e.SystemKey != Key.None)? Description: string.Empty };
-            _properties.Add(++_countProperties, item);
+            var item = new LogItem
+            {
+                Action = action,
+                Value = kv,
+                Description = (Keyboard.Modifiers != ModifierKeys.None || e.SystemKey != Key.None) ? Description : string.Empty
+            };
+            AddLogItem(item, false);
         }
 
         bool CheckPasswordElement(UIElement targetElement)
@@ -164,37 +155,21 @@ namespace ColorChat.WPF.EventLogger
 
         Key GetKeyValue(Key key)
         {
-            switch (key)
+            return key switch
             {
-                case Key.Tab:
-                case Key.Left:
-                case Key.Right:
-                case Key.Up:
-                case Key.Down:
-                case Key.PageUp:
-                case Key.PageDown:
-                case Key.LeftCtrl:
-                case Key.RightCtrl:
-                case Key.LeftShift:
-                case Key.RightShift:
-                case Key.Enter:
-                case Key.Home:
-                case Key.End:
-                    return key;
-
-                default:
-                    return key;
-            }
+                Key.Tab or Key.Left or Key.Right or Key.Up or Key.Down or Key.PageUp or
+                Key.PageDown or Key.LeftCtrl or Key.RightCtrl or Key.LeftShift or Key.RightShift or
+                Key.Enter or Key.Home or Key.End => key,
+                _ => key,
+            };
         }
 
         public void Print()
         {
             foreach (var item in _properties)
             {
-                var i = item.Key;
                 var v = item.Value;
-                logger.Info($"logger: #{i} {v.Action} {v.Value} {v.Description}");
-                logger1.Info($"logger1: #{i} {v.Action} {v.Value} {v.Description}");
+                eventFile.Info($"{v.Action} {v.Value} {v.Description}");
             }
         }
 
@@ -203,40 +178,18 @@ namespace ColorChat.WPF.EventLogger
             FrameworkElement source = sender as FrameworkElement;
             if (source == null)
                 return;
-            CheckPasswordElement(source);
-            LogTextInput(_properties, e);
+            LogTextInput(e);
         }
 
-        void LogTextInput(IDictionary<int, LogItem> properties, TextCompositionEventArgs e)
+        void LogTextInput(TextCompositionEventArgs e)
         {
             var element = e.OriginalSource as UIElement;
             var el = element.GetType().Name;
             if (!_timestamp.HasValue || _timestamp.Value != e.Timestamp)
             {
                 _timestamp = e.Timestamp;
-                _properties.Add(++_countProperties, new LogItem { Action = $"A:TI {el} TimeStamp {e.Timestamp}", Value = $"V: {e.Text}" });
+                AddLogItem(new LogItem { Action = $"A:TI {el} TimeStamp: {e.Timestamp}", Value = $"V: {e.Text}" }, false);
             }
-        }
-
-        void OnKeyboardFocusChanged(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            FrameworkElement oldFocus = e.OldFocus as FrameworkElement;
-            if (oldFocus != null)
-            {
-                //LogFocus(isGotFocus: false, e);
-            }
-
-            FrameworkElement newFocus = e.NewFocus as FrameworkElement;
-            if (newFocus != null)
-            {
-                CurrentFocus = sender as FrameworkElement;
-                //LogFocus(isGotFocus: true, e);
-            }
-        }
-
-        void LogFocus(bool isGotFocus, KeyboardFocusChangedEventArgs e)
-        {
-            _properties.Add(++_countProperties, new LogItem { Action = $"A:{(isGotFocus == false ? "LostFocus" : "GotFocus")}", Value = $"V: {e.OriginalSource.ToString()}" });
         }
 
         private string GetDescription(MouseButtonEventArgs e)

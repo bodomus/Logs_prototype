@@ -104,7 +104,7 @@
     <Compile Include="EventLogger\TypeAction.cs" />
     <Compile Include="Export\BaseStrategy.cs" />
     <Compile Include="Export\ExcelConstants.cs" />
-    <Compile Include="Export\ExceptionStrategy3.cs" />
+    <Compile Include="Export\PidStrategy.cs" />
     <Compile Include="Export\EventStrategy.cs" />
     <Compile Include="Export\ExceptionStrategy.cs" />
     <Compile Include="Export\IExportExcelStrategy.cs" />
