@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PrototypeLogs.Export
@@ -47,9 +48,33 @@ namespace PrototypeLogs.Export
             {
                 rowIdx++;
                 Row row = excel.SheetData.AppendChild(new Row() { RowIndex = rowIdx });
-                excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                var item = GetLogItem(s);
+                if (item != null) {
+                    excel.InsertCell(row, "", CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    excel.InsertCell(row, item.Action, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    excel.InsertCell(row, item.Value, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    excel.InsertCell(row, item.Description, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                } else 
+                    excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
             }
             excel.Close();
+        }
+
+        private LogItem GetLogItem(string input)
+        {
+            //string input = "17:09:08:148 1.0.0.0 [1] (INFO): A:MousePress V: TextBlock D: Down";
+
+            Regex expression = new Regex(@"A:(?<Action>.*)V:(?<Value>.*)D:(?<Description>.*)$");
+
+            Match match = expression.Match(input);
+            var logItem = new LogItem();
+            if (match.Success)
+            {
+                logItem.Action = match.Groups["Action"].Value;
+                logItem.Value = match.Groups["Value"].Value;
+                logItem.Description = match.Groups["Description"].Value;
+            }
+            return logItem;
         }
     }
 }

@@ -22,16 +22,16 @@ namespace PrototypeLogs.Export
 
                 case "pid":
                     {
-                        return new EventStrategy(excelFile, name, strategyIndex);
+                        return new PidStrategy(excelFile, name, strategyIndex);
                     }
                 case "event":
                     {
-                        return new ExceptionStrategy(excelFile, name, strategyIndex);
+                        return new EventStrategy(excelFile, name, strategyIndex);
                     }
                 default:
                     {
-                        logger.Error("StrategyFactory invald file name");
-                        throw new InvalidProgramException("StrategyFactory invald file name");
+                        logger.Error("StrategyFactory: invald file name");
+                        throw new InvalidProgramException("StrategyFactory: invald file name");
                     }
             }
         }

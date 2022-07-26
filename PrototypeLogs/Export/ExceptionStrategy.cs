@@ -1,9 +1,11 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
+﻿using ColorChat.WPF.EventLogger;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PrototypeLogs.Export

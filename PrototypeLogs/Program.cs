@@ -17,7 +17,7 @@ namespace PrototypeLogs
 
         static void Main(string[] args)
         {
-            Test();
+            //Test();
             var logsFiles = LogsExporter.GetLogs();
             var excelFile = LogsExporter.GetExcelFileName();
             var logExport = new LogsExporter(logsFiles, excelFile);
@@ -25,10 +25,10 @@ namespace PrototypeLogs
 
         public static void Test() {
             
-            string input = "11:19:54:607 1.0.0.0 [1] (INFO): A:TI TextBox TimeStamp: 11405343 V: 2 ";
+            string input = "17:09:08:148 1.0.0.0 [1] (INFO): A:MousePress V: TextBlock D: Down";
 
             // ... Use named group in regular expression.
-            Regex expression = new Regex(@"A:(?<Action>\.*)V:");
+            Regex expression = new Regex(@"A:(?<Action>.*)V:(?<Value>.*)D:(?<Description>.*)$");
 
             // ... See if we matched.
             Match match = expression.Match(input);
@@ -36,6 +36,8 @@ namespace PrototypeLogs
             {
                 // ... Get group by name.
                 string result = match.Groups["Action"].Value;
+                string result1 = match.Groups["Value"].Value;
+                string result2 = match.Groups["Description"].Value;
                 Console.WriteLine("Action: {0}", result);
             }
             // Done.

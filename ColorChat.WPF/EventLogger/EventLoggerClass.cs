@@ -74,7 +74,7 @@ namespace ColorChat.WPF.EventLogger
         /// <param name="source"></param>
         private int CollectCommonProperties(TypeAction @type, FrameworkElement source, bool disableAutoReset)
         {
-            AddLogItem(new LogItem { Action = $"A:{@type.ToString()}", Value = $"V: {source.DependencyObjectType.Name}" }, disableAutoReset);
+            AddLogItem(new LogItem { Action = $"A:{@type.ToString()}", Value = $"V: {source.DependencyObjectType.Name}", Description = "D:" }, disableAutoReset);
             return _countProperties;
         }
 
@@ -107,15 +107,15 @@ namespace ColorChat.WPF.EventLogger
 
             if (e.ClickCount == 2)
             {
-                logItem.Description = "doubleClick";
+                logItem.Description = "D: doubleClick";
             }
             else if (isUp)
             {
-                logItem.Description = "up";
+                logItem.Description = "D: up";
             }
             else
             {
-                logItem.Description = "Down";
+                logItem.Description = "D: Down";
             }
         }
 
@@ -138,7 +138,7 @@ namespace ColorChat.WPF.EventLogger
             {
                 Action = action,
                 Value = kv,
-                Description = (Keyboard.Modifiers != ModifierKeys.None || e.SystemKey != Key.None) ? Description : string.Empty
+                Description = (Keyboard.Modifiers != ModifierKeys.None || e.SystemKey != Key.None) ? Description : "D:"
             };
             AddLogItem(item, false);
         }
@@ -188,7 +188,7 @@ namespace ColorChat.WPF.EventLogger
             if (!_timestamp.HasValue || _timestamp.Value != e.Timestamp)
             {
                 _timestamp = e.Timestamp;
-                AddLogItem(new LogItem { Action = $"A:TI {el} TimeStamp: {e.Timestamp}", Value = $"V: {e.Text}" }, false);
+                AddLogItem(new LogItem { Action = $"A:TI {el} ", Value = $"V: {e.Text}" , Description = $"D:"}, false);
             }
         }
 

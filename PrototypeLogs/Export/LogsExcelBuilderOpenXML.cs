@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using PrototypeLogs.Export;
 using NLog;
+using Pathway.WPF.ImportExport;
 
 namespace ColorChat.WPF.Export
 {
@@ -19,6 +20,7 @@ namespace ColorChat.WPF.Export
         private List<string> _logFilesNames;
         private string _excelFile;
         protected IExportExcelStrategy exportExcelStrategy;
+        public event ProgressEventDelegate ProgressExportLog;
         /// <summary>
         /// pid file create before this operation
         /// </summary>
@@ -67,8 +69,17 @@ namespace ColorChat.WPF.Export
                 SetCurrentStrategy(stindex);
                 _currentStrategy.DoWork();
 
+                OnProgress((double)stindex / (double)_logFilesNames.Count);
+
                 stindex = GetNextStrategy();
             } while (stindex > 0); 
+        }
+
+        private void OnProgress(double progress) {
+            if (ProgressExportLog != null)
+            {
+                ProgressExportLog(this, progress);
+            }
         }
     }
 }
