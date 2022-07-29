@@ -4,6 +4,32 @@
         <name>Pathway.WPF.ImportExport</name>
     </assembly>
     <members>
+        <member name="F:Pathway.WPF.ImportExport.EventLoggerClass._properties">
+            <summary>
+            key is number of order
+            </summary>
+        </member>
+        <member name="M:Pathway.WPF.ImportExport.EventLoggerClass.CollectCommonProperties(Pathway.WPF.ImportExport.TypeAction,System.Windows.FrameworkElement,System.Boolean)">
+            <summary>
+            Action
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.LogItem.Action">
+            <summary>
+            Name operation
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.LogItem.Value">
+            <summary>
+            value of the Action ie action-press button value - left
+            </summary>
+        </member>
+        <member name="P:Pathway.WPF.ImportExport.LogItem.Description">
+            <summary>
+            description
+            </summary>
+        </member>
         <member name="T:Pathway.WPF.ImportExport.CsvExporterBase">
             <summary>
             CsvExporter base class
