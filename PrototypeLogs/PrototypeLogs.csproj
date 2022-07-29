@@ -100,11 +100,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\ColumnsPreference.cs" />
+    <Compile Include="Domain\DeviceType.cs" />
+    <Compile Include="Domain\PIDLog.cs" />
     <Compile Include="EventLogger\LogItem.cs" />
     <Compile Include="EventLogger\TypeAction.cs" />
     <Compile Include="Export\BaseStrategy.cs" />
     <Compile Include="Export\ExcelConstants.cs" />
     <Compile Include="Export\LogItem.cs" />
+    <Compile Include="Export\LogsExcelBuilder.cs" />
     <Compile Include="Export\PidStrategy.cs" />
     <Compile Include="Export\EventStrategy.cs" />
     <Compile Include="Export\ExceptionStrategy.cs" />

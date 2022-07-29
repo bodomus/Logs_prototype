@@ -12,7 +12,6 @@ namespace PrototypeLogs.Export
     public class EventStrategy : BaseStrategy, IExportExcelStrategy
     {
         
-        private uint rowIdx = 0;
         private Dictionary<int, string> _sheetHeader
         {
             get
@@ -25,11 +24,8 @@ namespace PrototypeLogs.Export
                     };
             }
         }
-        public EventStrategy(string excelFile, string logFileName, uint strategyIndex) : base()
+        public EventStrategy(string excelFileName, string logFileName, uint strategyIndex) : base(excelFileName, logFileName, strategyIndex)
         {
-            _logFileName = logFileName;
-            _excelFileName = excelFile;
-            _strategyIndex = strategyIndex;
         }
 
         private string GetSheetName()
@@ -41,8 +37,7 @@ namespace PrototypeLogs.Export
             rowIdx = 2;
             var strings = ReadFile(new LogFileTextReader(_logFileName));
             var sheetName = GetSheetName();
-            var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex, true, false);
-            excel.SetColumnWidth(1, 10, 200);
+            var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex, true, null, false);
             excel.AddHeader(_sheetHeader);
             foreach (var s in strings)
             {
@@ -67,14 +62,17 @@ namespace PrototypeLogs.Export
             Regex expression = new Regex(@"A:(?<Action>.*)V:(?<Value>.*)D:(?<Description>.*)$");
 
             Match match = expression.Match(input);
-            var logItem = new LogItem();
+
             if (match.Success)
             {
-                logItem.Action = match.Groups["Action"].Value;
-                logItem.Value = match.Groups["Value"].Value;
-                logItem.Description = match.Groups["Description"].Value;
+                return new LogItem()
+                {
+                    Action = match.Groups["Action"].Value,
+                    Value = match.Groups["Value"].Value,
+                    Description = match.Groups["Description"].Value
+                };
             }
-            return logItem;
+            return null;
         }
     }
 }

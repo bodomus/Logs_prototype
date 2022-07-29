@@ -59,7 +59,7 @@ namespace ColorChat.WPF.Export
             _currentStrategy = strategy;
         }
 
-        public void DoWorkWithFile(string filePath)
+        public void DoWorkWithFile()
         {
             var stindex = GetNextStrategy();
             if (stindex < 0)

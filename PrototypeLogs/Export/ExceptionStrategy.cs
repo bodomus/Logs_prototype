@@ -1,5 +1,6 @@
 ﻿using ColorChat.WPF.EventLogger;
 using DocumentFormat.OpenXml.Spreadsheet;
+using PrototypeLogs.Domain;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,22 +13,28 @@ namespace PrototypeLogs.Export
 {
     public class ExceptionStrategy : BaseStrategy, IExportExcelStrategy
     {
-        private uint rowIdx = 0;
         private Dictionary<int, string> _sheetHeader
         {
             get
             {
                 return new Dictionary<int, string>() {
-                    {1, "Name"},
-                    {2, "Name 2"}
+                    {1, "Message"},
                     };
             }
         }
-        public ExceptionStrategy(string excelFile, string logFileName, uint strategyIndex) : base()
+        private List<ColumnsPreference> _colunmPreferences
         {
-            _logFileName = logFileName;
-            _excelFileName = excelFile;
-            _strategyIndex = strategyIndex;
+            get
+            {
+                return new List<ColumnsPreference>() {
+                    new ColumnsPreference{
+                        Min = 1, Max = 1, Width = 200
+                    }
+                    };
+            }
+        }
+        public ExceptionStrategy(string excelFileName, string logFileName, uint strategyIndex) : base(excelFileName, logFileName, strategyIndex)
+        {
         }
 
         private string GetSheetName()
@@ -39,8 +46,7 @@ namespace PrototypeLogs.Export
             rowIdx = 2;
             var strings = ReadFile(new LogFileTextReader(_logFileName));
             var sheetName = GetSheetName();
-            var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex);
-            excel.SetColumnWidth(1, 10, 200);
+            var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex, _colunmPreferences);
             excel.AddHeader(_sheetHeader);
             
             foreach (var s in strings)
