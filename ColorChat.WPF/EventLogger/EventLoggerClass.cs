@@ -6,16 +6,16 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using ColorChat.WPF.EventLogger;
 using NLog;
 
-namespace ColorChat.WPF.EventLogger
+namespace Pathway.WPF.ImportExport
 {
     public class EventLoggerClass : IEventLoggerClass
     {
         private const int MAX_LOG_BOUND = 10;
 
-        private static Logger eventFile = LogManager.GetLogger("eventFile");
+        private static Logger eventLog = LogManager.GetLogger("eventLog");
         private int _countProperties;
         private int? _timestamp;
         private Point? _lastMouseClickPoint;
@@ -24,12 +24,11 @@ namespace ColorChat.WPF.EventLogger
         /// <summary>
         /// key is number of order
         /// </summary>
-        private Dictionary<int, LogItem> _properties = new Dictionary<int, LogItem>();
+        private static Dictionary<int, LogItem> _properties = new Dictionary<int, LogItem>();
 
         public EventLoggerClass()
         {
             _countProperties = 0;
-            eventFile.Info("Start collect events...");
             EventManager.RegisterClassHandler(
                 typeof(Control),
                 UIElement.MouseDownEvent,
@@ -60,22 +59,17 @@ namespace ColorChat.WPF.EventLogger
 
         private void AddLogItem(LogItem item, bool disableAutoReset)
         {
-            _properties.Add(++_countProperties, item);
-            if (_countProperties > MAX_LOG_BOUND && !disableAutoReset)
-            {
-                Print();
-                ClearProperties();
-            }
+            eventLog.Info($"{item.Action} {item.Value} {item.Description}");
         }
 
         /// <summary>
         /// Action
         /// </summary>
         /// <param name="source"></param>
-        private int CollectCommonProperties(TypeAction @type, FrameworkElement source, bool disableAutoReset)
+        private LogItem CollectCommonProperties(TypeAction @type, FrameworkElement source, bool disableAutoReset)
         {
-            AddLogItem(new LogItem { Action = $"A:{@type.ToString()}", Value = $"V: {source.DependencyObjectType.Name}", Description = "D:" }, disableAutoReset);
-            return _countProperties;
+            LogItem li = new LogItem { Action = $"A: {@type.ToString()}", Value = $"V: {source.DependencyObjectType.Name}", Description = "D:" };
+            return li;
         }
 
         void MouseDown(object sender, MouseButtonEventArgs e)
@@ -94,29 +88,32 @@ namespace ColorChat.WPF.EventLogger
             }
             // Perform the hit test against a given portion of the visual object tree.
             HitTestResult result = VisualTreeHelper.HitTest(source, pt);
-            int key = CollectCommonProperties(TypeAction.MousePress, e.OriginalSource as FrameworkElement, true);
-            LogMouse(key, e, isUp: false);
+            var li = CollectCommonProperties(TypeAction.MousePress, e.OriginalSource as FrameworkElement, true);
+
+            LogMouse(li, e, pt);
         }
 
-        void LogMouse(int key, MouseButtonEventArgs e, bool isUp)
+        void LogMouse(LogItem li, MouseButtonEventArgs e, Point pt)
         {
-            if (!_properties.TryGetValue(key, out var logItem))
-            {
-                throw new ArgumentException($"Log mouse: invalid key: {key} in log dictionary.");
-            }
+            string result = "";
+            if (e.LeftButton == MouseButtonState.Pressed)
+                result += "Left button pressed ";
+            if (e.RightButton == MouseButtonState.Pressed)
+                result += " Right button pressed ";
+            if (e.MiddleButton == MouseButtonState.Pressed)
+                result += " Middle button pressed ";
 
             if (e.ClickCount == 2)
             {
-                logItem.Description = "D: doubleClick";
-            }
-            else if (isUp)
-            {
-                logItem.Description = "D: up";
+                li.Description = $"D: Double click " + result;
             }
             else
             {
-                logItem.Description = "D: Down";
+                li.Description = $"D: " + result;
             }
+
+            li.Action += $"X:{(int)pt.X} Y:{(int)pt.Y}";
+            AddLogItem(li, false);
         }
 
         void KeyDown(object sender, KeyEventArgs e)
@@ -132,7 +129,7 @@ namespace ColorChat.WPF.EventLogger
         void LogKeyboard(KeyEventArgs e, FrameworkElement source, bool isUp)
         {
             var action = $"A:KP: {source.GetType().Name}";
-            var kv = $"V: {GetKeyValue(e.Key).ToString()}";
+            var kv = $"V: {e.Key.ToString()}";
             var Description = $"D: Modifier: {Keyboard.Modifiers} SystemKey: {e.SystemKey.ToString()}";
             var item = new LogItem
             {
@@ -153,23 +150,23 @@ namespace ColorChat.WPF.EventLogger
             return false;
         }
 
-        Key GetKeyValue(Key key)
-        {
-            return key switch
-            {
-                Key.Tab or Key.Left or Key.Right or Key.Up or Key.Down or Key.PageUp or
-                Key.PageDown or Key.LeftCtrl or Key.RightCtrl or Key.LeftShift or Key.RightShift or
-                Key.Enter or Key.Home or Key.End => key,
-                _ => key,
-            };
-        }
+        //Key GetKeyValue(Key key)
+        //{
+        //    return key switch
+        //    {
+        //        Key.Tab or Key.Left or Key.Right or Key.Up or Key.Down or Key.PageUp or
+        //        Key.PageDown or Key.LeftCtrl or Key.RightCtrl or Key.LeftShift or Key.RightShift or
+        //        Key.Enter or Key.Home or Key.End => key,
+        //        _ => key,
+        //    };
+        //}
 
         public void Print()
         {
             foreach (var item in _properties)
             {
                 var v = item.Value;
-                eventFile.Info($"{v.Action} {v.Value} {v.Description}");
+                eventLog.Info($"{v.Action} {v.Value} {v.Description}");
             }
         }
 
@@ -188,35 +185,9 @@ namespace ColorChat.WPF.EventLogger
             if (!_timestamp.HasValue || _timestamp.Value != e.Timestamp)
             {
                 _timestamp = e.Timestamp;
-                AddLogItem(new LogItem { Action = $"A:TI {el} ", Value = $"V: {e.Text}" , Description = $"D:"}, false);
+                AddLogItem(new LogItem { Action = $"A:TI {el} ", Value = $"V: {e.Text}", Description = $"D:" }, false);
             }
         }
 
-        private string GetDescription(MouseButtonEventArgs e)
-        {
-            string objName = string.Empty;
-            if (e.OriginalSource is System.Windows.Controls.TextBlock && e.Source is FrameworkElement)
-                objName = (e.OriginalSource as System.Windows.Controls.TextBlock).Text;
-            //if (e.OriginalSource is System.Windows.Controls.Image && e.Source is FrameworkElement)
-            //    objName = this.GetObjectNameByImageName((e.OriginalSource as System.Windows.Controls.Image).Source.ToString());
-            if (FindUpVisualTree<System.Windows.Controls.TextBox>(e.OriginalSource as DependencyObject) != null && e.Source is FrameworkElement)
-                objName = (FindUpVisualTree<System.Windows.Controls.TextBox>(e.OriginalSource as DependencyObject)).Text;
-
-            if (!string.IsNullOrWhiteSpace(objName))
-                return string.Format("Click on '{0}', '{1}'", objName, (e.Source as FrameworkElement).Name);
-            else
-                return string.Empty;
-        }
-
-        public static T FindUpVisualTree<T>(DependencyObject initial) where T : DependencyObject
-        {
-            DependencyObject current = initial;
-
-            while (current != null && current.GetType() != typeof(T))
-            {
-                current = VisualTreeHelper.GetParent(current);
-            }
-            return current as T;
-        }
     }
 }

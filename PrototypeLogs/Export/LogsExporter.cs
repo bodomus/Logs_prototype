@@ -115,7 +115,7 @@ namespace ColorChat.WPF.Export
             {
                 _builder = new LogsExcelBuilderOpenXML(this.m_fileName, m_logList);
                 _builder.ProgressExportLog += _builder_ProgressExportLog;
-                _builder.DoWorkWithFile(m_logList[0]);
+                _builder.DoWorkWithFile();
                 logger1.Info($"_builder is created.");
             }
             Interlocked.Increment(ref _ref);

@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ColorChat.WPF.EventLogger;
+using Pathway.WPF.ImportExport;
 
 namespace ColorChat.WPF
 {
@@ -22,7 +23,7 @@ namespace ColorChat.WPF
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            logger1.Info("Note \n A: \tAction\n V: \tValue\n D: \tDesciption\n KP: \tKeyPress\n TI: \tText input\n MP: \tMouse press\n ");
+            //logger1.Info("Note \n A: \tAction\n V: \tValue\n D: \tDesciption\n KP: \tKeyPress\n TI: \tText input\n MP: \tMouse press\n ");
            
             HubConnection connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:5000/colorchat")

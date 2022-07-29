@@ -7,6 +7,8 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
 using Pathway.WPF.ImportExport.Excel;
+using PrototypeLogs.Domain;
+using VerticalAlignmentValues = DocumentFormat.OpenXml.Spreadsheet.VerticalAlignmentValues;
 
 namespace PrototypeLogs.Export
 {
@@ -26,22 +28,23 @@ namespace PrototypeLogs.Export
         /// Creates new LogsOpenXML
         /// </summary>
         /// <param name="fileName">Name of file to export in</param>
-        public LogsOpenXML(string fileName, string sheetName, uint sheetIndex, bool isReadonly = false):base(fileName)
+        public LogsOpenXML(string fileName, string sheetName, uint sheetIndex, List<ColumnsPreference> columnsPreferences = null, bool isReadonly = false)
+            :base(fileName)
         {
             if (String.IsNullOrEmpty(fileName))
                 throw new ArgumentException("fileName");
             _fileName = fileName;
-            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet(sheetName, sheetIndex, 200);
+            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheetEx(sheetName, sheetIndex, columnsPreferences);
             Sheet = dataSheets.Key;
             SheetData = dataSheets.Value;
         }
 
-        public LogsOpenXML(string fileName, string sheetName, uint sheetIndex, bool withReopen, bool isReadonly = false) : base(fileName, true)
+        public LogsOpenXML(string fileName, string sheetName, uint sheetIndex, bool withReopen, List<ColumnsPreference> columnsPreferences = null, bool isReadonly = false) : base(fileName, true)
         {
             if (String.IsNullOrEmpty(fileName))
                 throw new ArgumentException("fileName");
 
-            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheet(sheetName, sheetIndex, 200);
+            KeyValuePair<WorksheetPart, SheetData> dataSheets = CreateSheetEx(sheetName, sheetIndex, columnsPreferences);
             Sheet = dataSheets.Key;
             SheetData = dataSheets.Value;
             _fileName = fileName;
@@ -142,6 +145,61 @@ namespace PrototypeLogs.Export
 
             // Get the sheetData cells
             this.SheetData = Sheet.Worksheet.GetFirstChild<SheetData>();
+        }
+
+        public void FormatCell(string cellReference, string cellValue)
+        {
+            Stylesheet stylesheet = book.WorkbookStylesPart.Stylesheet;
+            List<UInt32> IndexRef = AddHeaderStyle(ref stylesheet);
+            stylesheet.Save();
+            
+            Row r = SheetData.Elements<Row>().Where(row => row.RowIndex == 1).First();
+            Cell c1;
+            if (r.Descendants<Cell>().Where(w => w.CellReference == cellReference).Count() == 0)
+            {
+                c1 = new Cell() { CellReference = cellReference };
+                r.AppendChild(c1);
+            }
+            else
+            {
+                c1 = r.Descendants<Cell>().Where(w => w.CellReference == cellReference).First();
+            }
+
+            c1.CellValue = new CellValue(cellValue);
+            c1.DataType = new EnumValue<CellValues>(CellValues.String);
+            c1.StyleIndex = IndexRef[2];
+        }
+
+        public static List<UInt32> AddHeaderStyle(ref Stylesheet stylesheet)
+        {
+            UInt32 FontId = 0, FillId = 0, CellFormatId = 0;
+            Font font = new Font(new FontSize() { Val = 36 },
+                new BackgroundColor() { Rgb = HexBinaryValue.FromString("FFFFFF") });
+            stylesheet.Fonts.AppendChild(font);
+            FontId = stylesheet.Fonts.Count++;
+            PatternFill pFill = new PatternFill() { PatternType = PatternValues.Solid };
+            pFill.BackgroundColor = new BackgroundColor() { Rgb = HexBinaryValue.FromString("FFFFFF") };
+            stylesheet.Fills.Append(new Fill() { PatternFill = pFill });
+            FillId = stylesheet.Fills.Count++;
+
+            var h = new EnumValue<HorizontalAlignmentValues>(HorizontalAlignmentValues.Left);
+
+            Alignment alignment = new Alignment()
+            {
+                Horizontal = h,
+                Vertical = VerticalAlignmentValues.Center
+            };
+
+            CellFormat cellFormat = new CellFormat()
+            {
+                FontId = FontId, FillId = FillId, ApplyFill = true, Alignment = new Alignment()
+                {
+                    Vertical = VerticalAlignmentValues.Center
+                }
+            };
+            stylesheet.CellFormats.AppendChild(cellFormat);
+            CellFormatId = stylesheet.CellFormats.Count++;
+            return new List<uint>() { FontId, FillId, CellFormatId };
         }
 
         // Given a column name, a row index, and a WorksheetPart, inserts a cell into the worksheet. 
@@ -285,6 +343,52 @@ namespace PrototypeLogs.Export
             return i;
         }
 
+        /// <summary>
+		/// Create sheet
+		/// </summary>
+		/// <returns>WorksheetPart and SheetData</returns>
+		protected KeyValuePair<WorksheetPart, SheetData> CreateSheetEx(string sheetName, uint shitId, IList<ColumnsPreference> colPreferences)
+        {
+            WorksheetPart wsPart = spreadsheetDocument.WorkbookPart.AddNewPart<WorksheetPart>();
+            wsPart.Worksheet = new Worksheet();
+            wsPart.Worksheet.Append(SetColumnsWidth(colPreferences));
+
+            SheetData sheetData = wsPart.Worksheet.AppendChild(new SheetData());
+
+            wsPart.Worksheet.Save();
+
+            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.GetFirstChild<Sheets>();
+            if (sheets == null)
+                sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
+            sheets.AppendChild(new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(wsPart), SheetId = shitId, Name = sheetName });
+
+            return new KeyValuePair<WorksheetPart, SheetData>(wsPart, sheetData);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="defaultColumnWidth"></param>
+        /// <returns></returns>
+        protected virtual Columns SetColumnsWidth(IList<ColumnsPreference> columnsPreferences)
+        {
+            Columns columns = new Columns();
+            if (columnsPreferences == null)
+            {
+                Column column = new Column() { Min = 1, Max = 255, Width = 50, CustomWidth = true };
+                columns.Append(column);
+            }
+            else
+            {
+                foreach (ColumnsPreference p in columnsPreferences)
+                {
+                    Column column = new Column() { Min = p.Min, Max = p.Max, Width = p.Width, CustomWidth = true };
+                    columns.Append(column);
+                }
+            }
+            
+            return columns;
+        }
 
         public static void CreateSpreadsheetWorkbook(string filepath, int sheetId, string sheetName)
         {
@@ -320,6 +424,5 @@ namespace PrototypeLogs.Export
             // Close the document.
             spreadsheetDocument.Close();
         }
-
     }
 }
