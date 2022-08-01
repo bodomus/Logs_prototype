@@ -1,16 +1,17 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using Pathway.WPF.Models;
-using PrototypeLogs.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static PrototypeLogs.Export.LogsOpenXML;
 
-namespace PrototypeLogs.Export
+using DocumentFormat.OpenXml.Spreadsheet;
+
+using Pathway.WPF.ImportExport.Logs.Domain;
+using Pathway.WPF.Models;
+
+namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
     public class PidStrategy : BaseStrategy, IExportExcelStrategy
     {
@@ -107,10 +108,6 @@ namespace PrototypeLogs.Export
         {
         }
 
-        private string GetSheetName()
-        {
-            return Path.GetFileNameWithoutExtension(_logFileName);
-        }
         public void DoWork()
         {
             rowIdx = 1;
@@ -126,24 +123,22 @@ namespace PrototypeLogs.Export
                 Row row = excel.SheetData.AppendChild(new Row() { RowIndex = rowIdx });
                 excel.FormatCell(row, "A", p.TimeStamp, rowIdx);
                 excel.FormatCell(row, "B", p.P, rowIdx);
-                excel.InsertCell(row, p.TimeStamp, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.P, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.I, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.D, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.Error, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.SetPoint, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.OldSetPoint, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.Temperature1, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.Temperature2, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.DAC, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.RealTemperature1, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.RealTemperature2, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.WaterTemp, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.PCB, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.Heatsink1Temp, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.Heatsink2Temp, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.TEC, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                excel.InsertCell(row, p.SensorMismatch, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                excel.FormatCell(row, "C", p.I, rowIdx);
+                excel.FormatCell(row, "D", p.D, rowIdx);
+                excel.FormatCell(row, "E", p.Error, rowIdx);
+                excel.FormatCell(row, "F", p.SetPoint, rowIdx);
+                excel.FormatCell(row, "G", p.OldSetPoint, rowIdx);
+                excel.FormatCell(row, "H", p.Temperature1, rowIdx);
+                excel.FormatCell(row, "I", p.Temperature2, rowIdx);
+                excel.FormatCell(row, "J", p.DAC, rowIdx);
+                excel.FormatCell(row, "K", p.RealTemperature1, rowIdx);
+                excel.FormatCell(row, "L", p.RealTemperature2, rowIdx);
+                excel.FormatCell(row, "M", p.WaterTemp, rowIdx);
+                excel.FormatCell(row, "N", p.PCB, rowIdx);
+                excel.FormatCell(row, "O", p.Heatsink1Temp, rowIdx);
+                excel.FormatCell(row, "P", p.Heatsink2Temp, rowIdx);
+                excel.FormatCell(row, "R", p.TEC, rowIdx);
+                excel.FormatCell(row, "S", p.SensorMismatch, rowIdx);
             }
             excel.Close();
         }
@@ -154,7 +149,7 @@ namespace PrototypeLogs.Export
                 return null;
             var ar = input.Split(',');
 
-            PIDLog result = new PIDLog()
+            return new PIDLog()
             {
                 TimeStamp = ar[0],
                 P = ar[1],
@@ -175,24 +170,6 @@ namespace PrototypeLogs.Export
                 TEC = ar[16],
                 SensorMismatch = ar[17],
             };
-            return result;
-
-
-            ////TimeStamp,P,I,D,Error,SetPoint,OldSetPoint,Temperature1,Temperature2,DAC,RealTemperature1,RealTemperature2,WaterTemp,PCB,Heatsink1Temp,Heatsink2Temp,TEC,SensorMismatch,
-            //Regex expression = new Regex(@"(?<TimeStamp>.*),(?<P>.*),(?<I>.*),(?<D>.*),(?<Error>.*)
-            //    ,(?<SetPoint>.*),(?<OldSetPoint>.*),(?<Temperature1>.*),(?<Temperature2>.*),(?<DAC>.*),(?<RealTemperature1>.*)
-            //    ,(?<RealTemperature2>.*),(?<WaterTemp>.*),(?<PCB>.*),(?<Heatsink1Temp>.*),(?<Heatsink2Temp>.*),(?<TEC>.*),(?<SensorMismatch>.*)$");
-
-            //Match match = expression.Match(input);
-
-            //if (match.Success)
-            //{
-            //    return new PIDLog()
-            //    {
-            //        D = match.Groups["D"].Value,
-            //    };
-            //}
-            //return null;
         }
     }
 }

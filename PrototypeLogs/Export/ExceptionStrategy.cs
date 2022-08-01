@@ -1,7 +1,4 @@
-﻿using ColorChat.WPF.EventLogger;
-using DocumentFormat.OpenXml.Spreadsheet;
-using PrototypeLogs.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +6,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace PrototypeLogs.Export
+using DocumentFormat.OpenXml.Spreadsheet;
+using Pathway.WPF.ImportExport.Logs.Domain;
+
+namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
     public class ExceptionStrategy : BaseStrategy, IExportExcelStrategy
     {
@@ -19,7 +19,7 @@ namespace PrototypeLogs.Export
             {
                 return new Dictionary<int, string>() {
                     {1, "Exception message"},
-                    };
+                };
             }
         }
         private List<ColumnsPreference> _colunmPreferences
@@ -30,17 +30,13 @@ namespace PrototypeLogs.Export
                     new ColumnsPreference{
                         Min = 1, Max = 1, Width = 200
                     }
-                    };
+                };
             }
         }
         public ExceptionStrategy(string excelFileName, string logFileName, uint strategyIndex) : base(excelFileName, logFileName, strategyIndex)
         {
         }
 
-        private string GetSheetName()
-        {
-            return Path.GetFileNameWithoutExtension(_logFileName);
-        }
         public void DoWork()
         {
             rowIdx = 2;

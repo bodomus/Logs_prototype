@@ -1,12 +1,7 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PrototypeLogs.Export
+namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
     public class BaseStrategy
     {
@@ -23,6 +18,7 @@ namespace PrototypeLogs.Export
             _strategyIndex = strategyIndex;
             rowIdx = 0;
         }
+
         /// <summary>
         /// Read all strings from log file
         /// </summary>
@@ -31,6 +27,11 @@ namespace PrototypeLogs.Export
         protected IEnumerable<string> ReadFile(ILogFileReader logFileReader)
         {
             return logFileReader?.GetStrings();
+        }
+
+        protected string GetSheetName()
+        {
+            return Path.GetFileNameWithoutExtension(_logFileName);
         }
     }
 }

@@ -7,11 +7,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace PrototypeLogs.Export
+namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
     public class EventStrategy : BaseStrategy, IExportExcelStrategy
     {
-        
         private Dictionary<int, string> _sheetHeader
         {
             get
@@ -28,10 +27,7 @@ namespace PrototypeLogs.Export
         {
         }
 
-        private string GetSheetName()
-        {
-            return Path.GetFileNameWithoutExtension(_logFileName);
-        }
+
         public void DoWork()
         {
             rowIdx = 2;

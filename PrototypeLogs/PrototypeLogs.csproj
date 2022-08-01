@@ -105,6 +105,7 @@
     <Compile Include="Domain\PIDLog.cs" />
     <Compile Include="EventLogger\LogItem.cs" />
     <Compile Include="EventLogger\TypeAction.cs" />
+    <Compile Include="Export\BaseOpenXML.cs" />
     <Compile Include="Export\BaseStrategy.cs" />
     <Compile Include="Export\ExcelConstants.cs" />
     <Compile Include="Export\LogItem.cs" />

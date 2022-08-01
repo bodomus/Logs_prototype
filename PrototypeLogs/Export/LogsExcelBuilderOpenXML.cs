@@ -2,9 +2,10 @@
 
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using PrototypeLogs.Export;
+
 using NLog;
 using Pathway.WPF.ImportExport;
+using Pathway.WPF.ImportExport.Logs.Strategies;
 
 namespace ColorChat.WPF.Export
 {

@@ -7,11 +7,11 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
 using Pathway.WPF.ImportExport.Excel;
-using PrototypeLogs.Domain;
+using Pathway.WPF.ImportExport.Logs.Domain;
 
-namespace PrototypeLogs.Export
+namespace Pathway.WPF.ImportExport.Logs
 {
-    public class LogsOpenXML: ExcelBuilderOpenXML
+    public class LogsOpenXML: BaseOpenXML
     {
         private string _fileName;
         private SpreadsheetDocument _document;
@@ -22,9 +22,9 @@ namespace PrototypeLogs.Export
         public Stylesheet Stylesheet;
         public List<UInt32> IndexRefCellBase;
         public List<UInt32> IndexRefCellBase1;
-        public int CountSheets => spreadsheetDocument.WorkbookPart.Workbook.Sheets.Count();
+        public int CountSheets => SpreadsheetDocument.WorkbookPart.Workbook.Sheets.Count();
         
-        public SpreadsheetDocument Document => spreadsheetDocument;
+        public SpreadsheetDocument Document => SpreadsheetDocument;
 
         /// <summary>
         /// Creates new LogsOpenXML
@@ -53,7 +53,7 @@ namespace PrototypeLogs.Export
 
             Stylesheet = book.WorkbookStylesPart.Stylesheet;
             IndexRefCellBase = AddDefautlStyle1(ref Stylesheet);
-            IndexRefCellBase1 = AddDefautlStyle2(ref Stylesheet);
+            IndexRefCellBase1 = AddDefautlStyleEven(ref Stylesheet);
             Stylesheet.Save();
         }
 
@@ -64,7 +64,7 @@ namespace PrototypeLogs.Export
         /// <returns></returns>
         public Worksheet GetworksheetBySheetName(string sheetName)
         {
-            var workbookPart = spreadsheetDocument.WorkbookPart;
+            var workbookPart = SpreadsheetDocument.WorkbookPart;
             string relationshipId = workbookPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name.Equals(sheetName))?.Id;
 
             var worksheet = ((WorksheetPart)workbookPart.GetPartById(relationshipId)).Worksheet;
@@ -95,7 +95,7 @@ namespace PrototypeLogs.Export
             Worksheet = sheet;
         }
 
-        /// </summary>
+        /// <summary>
         /// <param name="row">Row</param>
         /// <param name="value">string</param>
         /// <param name="dateType">CellValues : Default CellValues.String</param>
@@ -114,8 +114,8 @@ namespace PrototypeLogs.Export
 
         public void Close()
         {
-            spreadsheetDocument.WorkbookPart.Workbook.Save();
-            spreadsheetDocument.Close();
+            SpreadsheetDocument.WorkbookPart.Workbook.Save();
+            SpreadsheetDocument.Close();
         }
 
         public void SetColumnWidth(int from, int to, int width)
@@ -156,23 +156,22 @@ namespace PrototypeLogs.Export
 
         public void FormatCell(Row row, string colName, string cellValue, uint rowIndex)
         {
-            
             var cellReference = colName + rowIndex.ToString();
             
-            Cell c1;
+            Cell c;
             if (row.Descendants<Cell>().Where(w => w.CellReference == cellReference).Count() == 0)
             {
-                c1 = new Cell() { CellReference = cellReference };
-                row.AppendChild(c1);
+                c = new Cell() { CellReference = cellReference };
+                row.AppendChild(c);
             }
             else
             {
-                c1 = row.Descendants<Cell>().Where(w => w.CellReference == cellReference).First();
+                c = row.Descendants<Cell>().Where(w => w.CellReference == cellReference).First();
             }
 
-            c1.CellValue = new CellValue(cellValue);
-            c1.DataType = new EnumValue<CellValues>(CellValues.String);
-            c1.StyleIndex = IndexRefCellBase[2];
+            c.CellValue = new CellValue(cellValue);
+            c.DataType = new EnumValue<CellValues>(CellValues.String);
+            c.StyleIndex = IndexRefCellBase[2];
         }
 
         public void FormatCell(uint rowIndex, string colName,  string cellValue)
@@ -214,7 +213,7 @@ namespace PrototypeLogs.Export
             c1.StyleIndex = IndexRef[2];
         }
 
-        public static List<UInt32> AddDefautlStyle1(ref Stylesheet stylesheet)
+        public List<UInt32> AddDefautlStyle1(ref Stylesheet stylesheet)
         {
             UInt32 FontId = 0, FillId = 0, CellFormatId = 0, BorderId = 0;
             Font font = new Font(new FontSize() { Val = 14 },
@@ -268,7 +267,7 @@ namespace PrototypeLogs.Export
             return new List<uint>() { FontId, FillId, CellFormatId };
         }
 
-        public static List<UInt32> AddDefautlStyle2(ref Stylesheet stylesheet)
+        public List<UInt32> AddDefautlStyleEven(ref Stylesheet stylesheet)
         {
             UInt32 FontId = 0, FillId = 0, CellFormatId = 0, BorderId = 0;
             Font font = new Font(new FontSize() { Val = 14 },
@@ -388,9 +387,8 @@ namespace PrototypeLogs.Export
         public UInt32Value InsertWorksheet()
         {
             // Open the document for editing.
-
             // Add a blank WorksheetPart.
-            var spreadSheet = spreadsheetDocument;
+            var spreadSheet = SpreadsheetDocument;
             WorksheetPart newWorksheetPart = spreadSheet.WorkbookPart.AddNewPart<WorksheetPart>();
             newWorksheetPart.Worksheet = new Worksheet(new SheetData());
 
@@ -415,32 +413,32 @@ namespace PrototypeLogs.Export
 
 
         //// Given a WorkbookPart, inserts a new worksheet.
-        //private static WorksheetPart InsertWorksheet(WorkbookPart workbookPart)
-        //{
-        //    // Add a new worksheet part to the workbook.
-        //    WorksheetPart newWorksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-        //    newWorksheetPart.Worksheet = new Worksheet(new SheetData());
-        //    newWorksheetPart.Worksheet.Save();
+        private static WorksheetPart InsertWorksheet(WorkbookPart workbookPart)
+        {
+            // Add a new worksheet part to the workbook.
+            WorksheetPart newWorksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+            newWorksheetPart.Worksheet = new Worksheet(new SheetData());
+            newWorksheetPart.Worksheet.Save();
 
-        //    Sheets sheets = workbookPart.Workbook.GetFirstChild<Sheets>();
-        //    string relationshipId = workbookPart.GetIdOfPart(newWorksheetPart);
+            Sheets sheets = workbookPart.Workbook.GetFirstChild<Sheets>();
+            string relationshipId = workbookPart.GetIdOfPart(newWorksheetPart);
 
-        //    // Get a unique ID for the new sheet.
-        //    uint sheetId = 1;
-        //    if (sheets.Elements<Sheet>().Count() > 0)
-        //    {
-        //        sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
-        //    }
+            // Get a unique ID for the new sheet.
+            uint sheetId = 1;
+            if (sheets.Elements<Sheet>().Count() > 0)
+            {
+                sheetId = sheets.Elements<Sheet>().Select(s => s.SheetId.Value).Max() + 1;
+            }
 
-        //    string sheetName = "Sheet" + sheetId;
+            string sheetName = "Sheet" + sheetId;
 
-        //    // Append the new worksheet and associate it with the workbook.
-        //    Sheet sheet = new Sheet() { Id = relationshipId, SheetId = sheetId, Name = sheetName };
-        //    sheets.Append(sheet);
-        //    workbookPart.Workbook.Save();
+            // Append the new worksheet and associate it with the workbook.
+            Sheet sheet = new Sheet() { Id = relationshipId, SheetId = sheetId, Name = sheetName };
+            sheets.Append(sheet);
+            workbookPart.Workbook.Save();
 
-        //    return newWorksheetPart;
-        //}
+            return newWorksheetPart;
+        }
 
         // Given text and a SharedStringTablePart, creates a SharedStringItem with the specified text 
         // and inserts it into the SharedStringTablePart. If the item already exists, returns its index.
@@ -478,7 +476,7 @@ namespace PrototypeLogs.Export
 		/// <returns>WorksheetPart and SheetData</returns>
 		protected KeyValuePair<WorksheetPart, SheetData> CreateSheetEx(string sheetName, uint shitId, IList<ColumnsPreference> colPreferences)
         {
-            WorksheetPart wsPart = spreadsheetDocument.WorkbookPart.AddNewPart<WorksheetPart>();
+            WorksheetPart wsPart = SpreadsheetDocument.WorkbookPart.AddNewPart<WorksheetPart>();
             wsPart.Worksheet = new Worksheet();
             wsPart.Worksheet.Append(SetColumnsWidth(colPreferences));
 
@@ -486,37 +484,12 @@ namespace PrototypeLogs.Export
 
             wsPart.Worksheet.Save();
 
-            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.GetFirstChild<Sheets>();
+            Sheets sheets = SpreadsheetDocument.WorkbookPart.Workbook.GetFirstChild<Sheets>();
             if (sheets == null)
-                sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
-            sheets.AppendChild(new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(wsPart), SheetId = shitId, Name = sheetName });
+                sheets = SpreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
+            sheets.AppendChild(new Sheet() { Id = SpreadsheetDocument.WorkbookPart.GetIdOfPart(wsPart), SheetId = shitId, Name = sheetName });
 
             return new KeyValuePair<WorksheetPart, SheetData>(wsPart, sheetData);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="defaultColumnWidth"></param>
-        /// <returns></returns>
-        protected virtual Columns SetColumnsWidth(IList<ColumnsPreference> columnsPreferences)
-        {
-            Columns columns = new Columns();
-            if (columnsPreferences == null)
-            {
-                Column column = new Column() { Min = 1, Max = 255, Width = 50, CustomWidth = true };
-                columns.Append(column);
-            }
-            else
-            {
-                foreach (ColumnsPreference p in columnsPreferences)
-                {
-                    Column column = new Column() { Min = p.Min, Max = p.Max, Width = p.Width, CustomWidth = true };
-                    columns.Append(column);
-                }
-            }
-            
-            return columns;
         }
 
         public static void CreateSpreadsheetWorkbook(string filepath, int sheetId, string sheetName)
@@ -544,7 +517,7 @@ namespace PrototypeLogs.Export
                 Id = spreadsheetDocument.WorkbookPart.
                 GetIdOfPart(worksheetPart),
                 SheetId = 1,
-                Name = "mySheet"
+                Name = sheetName
             };
             sheets.Append(sheet);
 

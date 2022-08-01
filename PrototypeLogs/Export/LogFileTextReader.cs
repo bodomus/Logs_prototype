@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrototypeLogs.Export
+namespace Pathway.WPF.ImportExport.Logs
 {
-
     public class LogFileTextReader : ILogFileReader
     {
-        private string _fileName;
+        private readonly string _fileName;
         public LogFileTextReader(string filePath)
         {
             _fileName = filePath;

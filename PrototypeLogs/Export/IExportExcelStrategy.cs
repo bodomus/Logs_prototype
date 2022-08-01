@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrototypeLogs.Export
+namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
     public interface IExportExcelStrategy
     {

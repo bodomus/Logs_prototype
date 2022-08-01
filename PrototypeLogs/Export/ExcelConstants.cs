@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrototypeLogs.Export
+﻿namespace Pathway.WPF.ImportExport.Logs
 {
-    internal class ExcelConstants
+    internal static class ExcelConstants
     {
         public const uint DEFAULTINDEXSTYLE = 1;
         public const uint BOLDINDEXSTYLE = 2;

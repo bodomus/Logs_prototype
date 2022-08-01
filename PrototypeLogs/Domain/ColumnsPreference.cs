@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrototypeLogs.Domain
+namespace Pathway.WPF.ImportExport.Logs.Domain
 {
     public class ColumnsPreference
     {

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using NLog;
 
-namespace PrototypeLogs.Export
+namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
-    internal class StrategyFactory
+    public class StrategyFactory
     {
         private static Logger logger = LogManager.GetLogger("file");
         public static IExportExcelStrategy Create(string excelFile, string name, uint strategyIndex)
@@ -16,23 +13,23 @@ namespace PrototypeLogs.Export
             switch (Path.GetFileNameWithoutExtension(name))
             {
                 case "short":
-                    {
-                        return new ExceptionStrategy(excelFile, name, strategyIndex);
-                    }
+                {
+                    return new ExceptionStrategy(excelFile, name, strategyIndex);
+                }
 
                 case "pid":
-                    {
-                        return new PidStrategy(excelFile, name, strategyIndex);
-                    }
+                {
+                    return new PidStrategy(excelFile, name, strategyIndex);
+                }
                 case "event":
-                    {
-                        return new EventStrategy(excelFile, name, strategyIndex);
-                    }
+                {
+                    return new EventStrategy(excelFile, name, strategyIndex);
+                }
                 default:
-                    {
-                        logger.Error("StrategyFactory: invald file name");
-                        throw new InvalidProgramException("StrategyFactory: invald file name");
-                    }
+                {
+                    logger.Error("StrategyFactory: invald file name");
+                    throw new InvalidProgramException("StrategyFactory: invald file name");
+                }
             }
         }
     }

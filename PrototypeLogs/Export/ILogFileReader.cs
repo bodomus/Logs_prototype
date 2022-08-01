@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PrototypeLogs.Export
+namespace Pathway.WPF.ImportExport
 {
     public interface ILogFileReader
     {

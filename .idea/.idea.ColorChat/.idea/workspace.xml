@@ -8,24 +8,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b321a09a-3a53-4929-b9c4-0a4cd4847e39" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ColorChat/.idea/sonarlint/issuestore/e/8/e81cbd732d1b2abff0dd211caa4df6a30f28a54a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ColorChat/.idea/sonarlint/issuestore/e/e/ee98011724d5829f9f70806b49d29593b56e837b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ColorChat/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ColorChat/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ColorChat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ColorChat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ColorChat.WPF/EventLogger/EventLoggerClass.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ColorChat.WPF/EventLogger/EventLoggerClass.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrototypeLogs/Domain/ColumnsPreference.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Domain/ColumnsPreference.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/BaseStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/BaseStrategy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/EventStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/EventStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/ExcelConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/ExcelConstants.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/ExceptionStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/ExceptionStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/IExportExcelStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/IExportExcelStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/ILogFileReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/ILogFileReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/LogFileTextReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/LogFileTextReader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/LogsExcelBuilderOpenXML.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/LogsExcelBuilderOpenXML.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/LogsExporter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/LogsExporter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/LogsOpenXML.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/LogsOpenXML.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/PidStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/PidStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrototypeLogs/Export/StrategyFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/Export/StrategyFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PrototypeLogs/PrototypeLogs.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PrototypeLogs/PrototypeLogs.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7316bf1edfd42b484fda64cef0dcf0158b068/07/993ad298/EnumValue`1.cs" root0="SKIP_HIGHLIGHTING" />
@@ -44,6 +53,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -129,6 +140,8 @@
       <workItem from="1658994845254" duration="609000" />
       <workItem from="1658995499918" duration="5298000" />
       <workItem from="1659073456404" duration="1100000" />
+      <workItem from="1659250757181" duration="641000" />
+      <workItem from="1659330316134" duration="5129000" />
     </task>
     <servers />
   </component>
@@ -138,6 +151,17 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
