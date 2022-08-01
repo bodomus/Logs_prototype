@@ -18,7 +18,7 @@ namespace PrototypeLogs.Export
             get
             {
                 return new Dictionary<int, string>() {
-                    {1, "Message"},
+                    {1, "Exception message"},
                     };
             }
         }

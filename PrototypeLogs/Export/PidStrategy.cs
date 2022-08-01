@@ -124,6 +124,8 @@ namespace PrototypeLogs.Export
                 var p = GetPidItem(s);
                 rowIdx++;
                 Row row = excel.SheetData.AppendChild(new Row() { RowIndex = rowIdx });
+                excel.FormatCell(row, "A", p.TimeStamp, rowIdx);
+                excel.FormatCell(row, "B", p.P, rowIdx);
                 excel.InsertCell(row, p.TimeStamp, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
                 excel.InsertCell(row, p.P, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
                 excel.InsertCell(row, p.I, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);

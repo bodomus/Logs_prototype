@@ -8,7 +8,6 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 using Pathway.WPF.ImportExport.Excel;
 using PrototypeLogs.Domain;
-using VerticalAlignmentValues = DocumentFormat.OpenXml.Spreadsheet.VerticalAlignmentValues;
 
 namespace PrototypeLogs.Export
 {
@@ -20,6 +19,9 @@ namespace PrototypeLogs.Export
 
         public WorksheetPart Sheet;
         public SheetData SheetData;
+        public Stylesheet Stylesheet;
+        public List<UInt32> IndexRefCellBase;
+        public List<UInt32> IndexRefCellBase1;
         public int CountSheets => spreadsheetDocument.WorkbookPart.Workbook.Sheets.Count();
         
         public SpreadsheetDocument Document => spreadsheetDocument;
@@ -48,6 +50,11 @@ namespace PrototypeLogs.Export
             Sheet = dataSheets.Key;
             SheetData = dataSheets.Value;
             _fileName = fileName;
+
+            Stylesheet = book.WorkbookStylesPart.Stylesheet;
+            IndexRefCellBase = AddDefautlStyle1(ref Stylesheet);
+            IndexRefCellBase1 = AddDefautlStyle2(ref Stylesheet);
+            Stylesheet.Save();
         }
 
         /// <summary>
@@ -147,22 +154,59 @@ namespace PrototypeLogs.Export
             this.SheetData = Sheet.Worksheet.GetFirstChild<SheetData>();
         }
 
-        public void FormatCell(string cellReference, string cellValue)
+        public void FormatCell(Row row, string colName, string cellValue, uint rowIndex)
         {
-            Stylesheet stylesheet = book.WorkbookStylesPart.Stylesheet;
-            List<UInt32> IndexRef = AddHeaderStyle(ref stylesheet);
-            stylesheet.Save();
             
-            Row r = SheetData.Elements<Row>().Where(row => row.RowIndex == 1).First();
+            var cellReference = colName + rowIndex.ToString();
+            
             Cell c1;
-            if (r.Descendants<Cell>().Where(w => w.CellReference == cellReference).Count() == 0)
+            if (row.Descendants<Cell>().Where(w => w.CellReference == cellReference).Count() == 0)
             {
                 c1 = new Cell() { CellReference = cellReference };
-                r.AppendChild(c1);
+                row.AppendChild(c1);
             }
             else
             {
-                c1 = r.Descendants<Cell>().Where(w => w.CellReference == cellReference).First();
+                c1 = row.Descendants<Cell>().Where(w => w.CellReference == cellReference).First();
+            }
+
+            c1.CellValue = new CellValue(cellValue);
+            c1.DataType = new EnumValue<CellValues>(CellValues.String);
+            c1.StyleIndex = IndexRefCellBase[2];
+        }
+
+        public void FormatCell(uint rowIndex, string colName,  string cellValue)
+        {
+
+            string cellReference = colName + rowIndex.ToString();
+            Stylesheet stylesheet = book.WorkbookStylesPart.Stylesheet;
+            List<UInt32> IndexRef = AddDefautlStyle1(ref stylesheet);
+            stylesheet.Save();
+
+            //var d = SheetData.Elements<Row>();
+            //Row r = SheetData.Elements<Row>().Where(row => row.RowIndex == 0).First();
+            Row row;
+            
+            if (SheetData.Elements<Row>().SingleOrDefault(r => r.RowIndex == rowIndex) != null)
+            {
+                row = SheetData.Elements<Row>().Where(r => r.RowIndex == rowIndex).First();
+            }
+            else
+            {
+                row = new Row() { RowIndex = (uint)rowIndex };
+                SheetData.Append(row);
+            }
+
+            
+            Cell c1;
+            if (row.Descendants<Cell>().Where(w => w.CellReference == cellReference).Count() == 0)
+            {
+                c1 = new Cell() { CellReference = cellReference };
+                row.AppendChild(c1);
+            }
+            else
+            {
+                c1 = row.Descendants<Cell>().Where(w => w.CellReference == cellReference).First();
             }
 
             c1.CellValue = new CellValue(cellValue);
@@ -170,33 +214,118 @@ namespace PrototypeLogs.Export
             c1.StyleIndex = IndexRef[2];
         }
 
-        public static List<UInt32> AddHeaderStyle(ref Stylesheet stylesheet)
+        public static List<UInt32> AddDefautlStyle1(ref Stylesheet stylesheet)
         {
-            UInt32 FontId = 0, FillId = 0, CellFormatId = 0;
-            Font font = new Font(new FontSize() { Val = 36 },
-                new BackgroundColor() { Rgb = HexBinaryValue.FromString("FFFFFF") });
+            UInt32 FontId = 0, FillId = 0, CellFormatId = 0, BorderId = 0;
+            Font font = new Font(new FontSize() { Val = 14 },
+                new Color() { Rgb = HexBinaryValue.FromString("1122FF") });
             stylesheet.Fonts.AppendChild(font);
             FontId = stylesheet.Fonts.Count++;
             PatternFill pFill = new PatternFill() { PatternType = PatternValues.Solid };
-            pFill.BackgroundColor = new BackgroundColor() { Rgb = HexBinaryValue.FromString("FFFFFF") };
+            pFill.ForegroundColor = new ForegroundColor() { Rgb = HexBinaryValue.FromString("FFFFFF") };
             stylesheet.Fills.Append(new Fill() { PatternFill = pFill });
             FillId = stylesheet.Fills.Count++;
 
-            var h = new EnumValue<HorizontalAlignmentValues>(HorizontalAlignmentValues.Left);
+            Border b = new Border() { 
+                LeftBorder = new LeftBorder() { 
+                    Style = BorderStyleValues.Thin, Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                },
+                BottomBorder = new BottomBorder() {
+                    Style = BorderStyleValues.Thin,
+                    Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                }, 
+                TopBorder = new TopBorder()
+                {
+                    Style = BorderStyleValues.Thin,
+                    Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                },
+                RightBorder = new RightBorder()
+                {
+                    Style = BorderStyleValues.Thin,
+                    Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                },
+            };
+            stylesheet.Borders.Append(b);
+            BorderId = stylesheet.Borders.Count++;
 
             Alignment alignment = new Alignment()
             {
-                Horizontal = h,
+                Horizontal = HorizontalAlignmentValues.Left,
                 Vertical = VerticalAlignmentValues.Center
             };
 
             CellFormat cellFormat = new CellFormat()
             {
-                FontId = FontId, FillId = FillId, ApplyFill = true, Alignment = new Alignment()
+                FontId = FontId, FillId = FillId, ApplyFill = true, BorderId = BorderId, Alignment = new Alignment()
                 {
-                    Vertical = VerticalAlignmentValues.Center
-                }
+                    Vertical = VerticalAlignmentValues.Center, 
+                    Horizontal = HorizontalAlignmentValues.Left
+                },
             };
+            
+            stylesheet.CellFormats.AppendChild(cellFormat);
+            CellFormatId = stylesheet.CellFormats.Count++;
+            return new List<uint>() { FontId, FillId, CellFormatId };
+        }
+
+        public static List<UInt32> AddDefautlStyle2(ref Stylesheet stylesheet)
+        {
+            UInt32 FontId = 0, FillId = 0, CellFormatId = 0, BorderId = 0;
+            Font font = new Font(new FontSize() { Val = 14 },
+                new Color() { Rgb = HexBinaryValue.FromString("1122FF") });
+            stylesheet.Fonts.AppendChild(font);
+            FontId = stylesheet.Fonts.Count++;
+            PatternFill pFill = new PatternFill() { PatternType = PatternValues.Solid };
+            pFill.ForegroundColor = new ForegroundColor() { Rgb = HexBinaryValue.FromString("FFFFFF") };
+            pFill.BackgroundColor = new BackgroundColor() { Rgb = HexBinaryValue.FromString("a2b8db") };
+            stylesheet.Fills.Append(new Fill() { PatternFill = pFill });
+            FillId = stylesheet.Fills.Count++;
+
+            Border b = new Border()
+            {
+                LeftBorder = new LeftBorder()
+                {
+                    Style = BorderStyleValues.Thin,
+                    Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                },
+                BottomBorder = new BottomBorder()
+                {
+                    Style = BorderStyleValues.Thin,
+                    Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                },
+                TopBorder = new TopBorder()
+                {
+                    Style = BorderStyleValues.Thin,
+                    Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                },
+                RightBorder = new RightBorder()
+                {
+                    Style = BorderStyleValues.Thin,
+                    Color = new Color() { Rgb = HexBinaryValue.FromString("1122FF") }
+                },
+            };
+            stylesheet.Borders.Append(b);
+            BorderId = stylesheet.Borders.Count++;
+
+            Alignment alignment = new Alignment()
+            {
+                Horizontal = HorizontalAlignmentValues.Left,
+                Vertical = VerticalAlignmentValues.Center
+            };
+
+            CellFormat cellFormat = new CellFormat()
+            {
+                FontId = FontId,
+                FillId = FillId,
+                ApplyFill = true,
+                BorderId = BorderId,
+                Alignment = new Alignment()
+                {
+                    Vertical = VerticalAlignmentValues.Center,
+                    Horizontal = HorizontalAlignmentValues.Left
+                },
+            };
+
             stylesheet.CellFormats.AppendChild(cellFormat);
             CellFormatId = stylesheet.CellFormats.Count++;
             return new List<uint>() { FontId, FillId, CellFormatId };
