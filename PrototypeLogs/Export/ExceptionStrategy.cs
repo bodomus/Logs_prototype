@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using DocumentFormat.OpenXml.Spreadsheet;
 using Pathway.WPF.ImportExport.Logs.Domain;
+using Pathway.WPF.ImportExport.Logs.StyleSheetBuilder;
 
 namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
@@ -18,7 +13,8 @@ namespace Pathway.WPF.ImportExport.Logs.Strategies
             get
             {
                 return new Dictionary<int, string>() {
-                    {1, "Exception message"},
+                    {1, "№№"},
+                    {2, "Messages"},
                 };
             }
         }
@@ -28,7 +24,10 @@ namespace Pathway.WPF.ImportExport.Logs.Strategies
             {
                 return new List<ColumnsPreference>() {
                     new ColumnsPreference{
-                        Min = 1, Max = 1, Width = 200
+                        Min = 1, Max = 1, Width = 20
+                    },
+                    new ColumnsPreference{
+                        Min = 2, Max = 2, Width = 500
                     }
                 };
             }
@@ -39,17 +38,25 @@ namespace Pathway.WPF.ImportExport.Logs.Strategies
 
         public void DoWork()
         {
-            rowIdx = 2;
+            rowIdx = 1;
             var strings = ReadFile(new LogFileTextReader(_logFileName));
             var sheetName = GetSheetName();
             var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex, _colunmPreferences);
-            excel.AddHeader(_sheetHeader);
             
+            IStyleSheetWorker worker = new StyleSheetExceptionWorker(); 
+            worker.Prepare(excel.Stylesheet);
+            excel.Worker = worker;
+            excel.AddHeader(_sheetHeader, worker.IndexRefCellHeaderBase);
+
+            // excel.AddHeader(_sheetHeader);
             foreach (var s in strings)
             {
                 rowIdx++;
                 Row row = excel.SheetData.AppendChild(new Row() { RowIndex = rowIdx });
-                excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                excel.FormatCell(row, "A", (rowIdx - 1).ToString());
+                excel.FormatCell(row, "B", s);
+                // excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                // excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
             }
             excel.Close();
         }

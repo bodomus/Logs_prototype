@@ -118,8 +118,8 @@ namespace ColorChat.WPF.Export
                 _builder.DoWorkWithFile();
                 logger1.Info($"_builder is created.");
             }
-            Interlocked.Increment(ref _ref);
-            StartProcess();
+            //Interlocked.Increment(ref _ref);
+            //StartProcess();
         }
 
         private void _builder_ProgressExportLog(object sender, double progress)

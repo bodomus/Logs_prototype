@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Pathway.WPF.ImportExport.Logs.Domain;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Pathway.WPF.ImportExport.Logs.StyleSheetBuilder;
 
 namespace Pathway.WPF.ImportExport.Logs.Strategies
 {
@@ -19,8 +21,25 @@ namespace Pathway.WPF.ImportExport.Logs.Strategies
                     {1, "Date&Time"},
                     {2, "Action"},
                     {3, "Value"},
-                    {4, "Description"}
                     };
+            }
+        }
+
+        private List<ColumnsPreference> _colunmPreferences
+        {
+            get
+            {
+                return new List<ColumnsPreference>() {
+                    new ColumnsPreference{
+                        Min = 1, Max = 1, Width = 100
+                    },
+                    new ColumnsPreference{
+                        Min = 2, Max = 2, Width = 200
+                    },
+                    new ColumnsPreference{
+                        Min = 3, Max = 3, Width = 200
+                    }
+                };
             }
         }
         public EventStrategy(string excelFileName, string logFileName, uint strategyIndex) : base(excelFileName, logFileName, strategyIndex)
@@ -33,20 +52,32 @@ namespace Pathway.WPF.ImportExport.Logs.Strategies
             rowIdx = 2;
             var strings = ReadFile(new LogFileTextReader(_logFileName));
             var sheetName = GetSheetName();
-            var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex, true, null, false);
-            excel.AddHeader(_sheetHeader);
+            var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex, true, _colunmPreferences, false);
+            IStyleSheetWorker worker = new StyleSheetEventWorker(); 
+            worker.Prepare(excel.Stylesheet);
+            excel.Worker = worker;
+            excel.AddHeader(_sheetHeader, worker.IndexRefCellHeaderBase);
+
+            // excel.AddHeader(_sheetHeader);
             foreach (var s in strings)
             {
                 rowIdx++;
                 Row row = excel.SheetData.AppendChild(new Row() { RowIndex = rowIdx });
                 var item = GetLogItem(s);
                 if (item != null) {
-                    excel.InsertCell(row, "", CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                    excel.InsertCell(row, item.Action, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                    excel.InsertCell(row, item.Value, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
-                    excel.InsertCell(row, item.Description, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    excel.FormatCell(row, "A", String.Empty);
+                    excel.FormatCell(row, "B", item.Action);
+                    excel.FormatCell(row, "C", item.Value);
+                    excel.FormatCell(row, "D", item.Description);
+                    // excel.InsertCell(row, "", CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    // excel.InsertCell(row, item.Action, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    // excel.InsertCell(row, item.Value, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    // excel.InsertCell(row, item.Description, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    
+                    
                 } else 
-                    excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
+                    excel.FormatCell(row, "A", s);
+                    // excel.InsertCell(row, s, CellValues.String, ExcelConstants.BOLDINDEXSTYLE);
             }
             excel.Close();
         }

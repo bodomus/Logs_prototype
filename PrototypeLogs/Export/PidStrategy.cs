@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Spreadsheet;
 
 using Pathway.WPF.ImportExport.Logs.Domain;
+using Pathway.WPF.ImportExport.Logs.StyleSheetBuilder;
 using Pathway.WPF.Models;
 
 namespace Pathway.WPF.ImportExport.Logs.Strategies
@@ -42,6 +43,7 @@ namespace Pathway.WPF.ImportExport.Logs.Strategies
             }
         }
 
+        /// 
         private List<ColumnsPreference> _colunmPreferences
         {
             get
@@ -114,31 +116,35 @@ namespace Pathway.WPF.ImportExport.Logs.Strategies
             var strings = ReadFile(new LogFileTextReader(_logFileName)).ToList<string>();
             var sheetName = GetSheetName();
             var excel = new LogsOpenXML(_excelFileName, sheetName, _strategyIndex,  true, _colunmPreferences, false);
-            excel.AddHeader(_sheetHeader);
+
+            IStyleSheetWorker worker = new StyleSheetPidWorker(); 
+            worker.Prepare(excel.Stylesheet);
+            excel.Worker = worker;
+            excel.AddHeader(_sheetHeader, worker.IndexRefCellHeaderBase);
             strings.RemoveAt(0);
             foreach (var s in strings)
             {
                 var p = GetPidItem(s);
                 rowIdx++;
                 Row row = excel.SheetData.AppendChild(new Row() { RowIndex = rowIdx });
-                excel.FormatCell(row, "A", p.TimeStamp, rowIdx);
-                excel.FormatCell(row, "B", p.P, rowIdx);
-                excel.FormatCell(row, "C", p.I, rowIdx);
-                excel.FormatCell(row, "D", p.D, rowIdx);
-                excel.FormatCell(row, "E", p.Error, rowIdx);
-                excel.FormatCell(row, "F", p.SetPoint, rowIdx);
-                excel.FormatCell(row, "G", p.OldSetPoint, rowIdx);
-                excel.FormatCell(row, "H", p.Temperature1, rowIdx);
-                excel.FormatCell(row, "I", p.Temperature2, rowIdx);
-                excel.FormatCell(row, "J", p.DAC, rowIdx);
-                excel.FormatCell(row, "K", p.RealTemperature1, rowIdx);
-                excel.FormatCell(row, "L", p.RealTemperature2, rowIdx);
-                excel.FormatCell(row, "M", p.WaterTemp, rowIdx);
-                excel.FormatCell(row, "N", p.PCB, rowIdx);
-                excel.FormatCell(row, "O", p.Heatsink1Temp, rowIdx);
-                excel.FormatCell(row, "P", p.Heatsink2Temp, rowIdx);
-                excel.FormatCell(row, "R", p.TEC, rowIdx);
-                excel.FormatCell(row, "S", p.SensorMismatch, rowIdx);
+                excel.FormatCell(row, "A", p.TimeStamp);
+                excel.FormatCell(row, "B", p.P);
+                excel.FormatCell(row, "C", p.I);
+                excel.FormatCell(row, "D", p.D);
+                excel.FormatCell(row, "E", p.Error);
+                excel.FormatCell(row, "F", p.SetPoint);
+                excel.FormatCell(row, "G", p.OldSetPoint);
+                excel.FormatCell(row, "H", p.Temperature1);
+                excel.FormatCell(row, "I", p.Temperature2);
+                excel.FormatCell(row, "J", p.DAC);
+                excel.FormatCell(row, "K", p.RealTemperature1);
+                excel.FormatCell(row, "L", p.RealTemperature2);
+                excel.FormatCell(row, "M", p.WaterTemp);
+                excel.FormatCell(row, "N", p.PCB);
+                excel.FormatCell(row, "O", p.Heatsink1Temp);
+                excel.FormatCell(row, "P", p.Heatsink2Temp);
+                excel.FormatCell(row, "Q", p.TEC);
+                excel.FormatCell(row, "R", p.SensorMismatch);
             }
             excel.Close();
         }
